@@ -6,5 +6,11 @@
 
 ## Demo
 WIP
+```js
+_.isNumber(1989); // true
+_.isNumber('1989'); // false
+_.isArray([]); // true
+_.isString('1989'); // true
+```
 ## API
 WIP
