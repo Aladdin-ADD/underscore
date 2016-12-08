@@ -4,7 +4,7 @@
   "description": "函数式编程 underscore 完整测试",
   "main": "index.js",
   "scripts": {
-    "test": "tman",
+    "test": "tman tests/*.js",
     "test-cov": "istanbul cover _tman"
   },
   "repository": {
