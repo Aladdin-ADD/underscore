@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/Aladdin-ADD/underscore#readme",
   "devDependencies": {
-    "tman": "latest"
+    "tman": "latest",
+    "eslint": "latest"
   }
 }
