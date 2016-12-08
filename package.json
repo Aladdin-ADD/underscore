@@ -1,7 +1,7 @@
 {
   "name": "underscore",
   "version": "0.0.1",
-  "description": "函数式编程 underscore 完整测试",
+  "description": "underscore + 完整测试",
   "main": "index.js",
   "scripts": {
     "test": "tman tests/*.js && npm run lint",

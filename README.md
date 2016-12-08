@@ -2,7 +2,7 @@
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg)](https://opensource.org/licenses/mit-license.php)   
 # underscore
 ===
-函数式编程 underscore 完整测试
+underscore + 完整测试
 
 ## Demo
 WIP
