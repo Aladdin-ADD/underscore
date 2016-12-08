@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/Aladdin-ADD/underscore/issues"
   },
-  "homepage": "https://github.com/Aladdin-ADD/underscore#readme"
+  "homepage": "https://github.com/Aladdin-ADD/underscore#readme",
+  "devDependencies": {
+    "tman": "latest"
+  }
 }
