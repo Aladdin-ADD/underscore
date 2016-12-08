@@ -2,7 +2,7 @@ const _ = {};
 module.exports = _;
 
 // 常用的函数
-_.ø = function (){};
+_.ø = () => {};
 _.identity = x => x;
 _.toString = ({}).toString;
 
