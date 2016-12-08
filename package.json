@@ -7,7 +7,12 @@
     "test": "tman tests/*.js && npm run lint",
     "test-cov": "istanbul cover _tman",
     "lint": "eslint underscore.js tests/*.js",
-    "build": "babel --plugins transform-es2015-modules-umd underscore.js -s --presets=es2015 -o underscore.min.js"
+    "build": "rollup -c --environment DEPS -f umd -o dist/underscore.js",
+    "build:umd": "rollup -c -f umd -o dist/underscore.umd.js",
+    "dev": "rollup -c -w -f umd -o dist/underscore.umd.js",
+    "build:umd": "rollup -c -f umd -o dist/underscore.umd.js",
+    "build:browser": "rollup -c --environment DEPS -f umd -o dist/underscore.deps.js",
+    "build:es": "rollup -c -f es6 -o dist/underscore.es.js"
   },
   "repository": {
     "type": "git",
@@ -24,9 +29,16 @@
   },
   "homepage": "https://github.com/Aladdin-ADD/underscore#readme",
   "devDependencies": {
-    "babel-cli": "latest",
-    "babel-plugin-transform-es2015-modules-umd": "^6.18.0",
     "eslint": "latest",
-    "tman": "latest"
+    "tman": "latest",
+    "buble": "latest",
+    "rollup": "^0.36.3",
+    "rollup-plugin-buble": "^0.8.0",
+    "rollup-plugin-commonjs": "^2.2.1",
+    "rollup-plugin-json": "^2.0.0",
+    "rollup-plugin-node-resolve": "^1.5.0",
+    "rollup-watch": "^2.5.0",
+    "source-map": "^0.5.6",
+    "source-map-support": "^0.4.0"
   }
 }
