@@ -14,3 +14,5 @@ _.isArray = _.isType('Array');
 _.isNumber = _.isType('Number');
 _.isString = _.isType('String');
 _.isBoolean = _.isType('Boolean');
+_.isNull = _.isType('Null');
+_.isUndefined = _.isType('Undefined');
