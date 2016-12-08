@@ -4,7 +4,7 @@
   "description": "函数式编程 underscore 完整测试",
   "main": "index.js",
   "scripts": {
-    "test": "tman tests/*.js",
+    "test": "tman tests/*.js && npm run lint",
     "test-cov": "istanbul cover _tman",
     "lint": "eslint underscore.js tests/*.js"
   },
