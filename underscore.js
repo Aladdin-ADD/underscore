@@ -3,7 +3,7 @@ module.exports = _;
 
 // 常用的函数
 _.ø = function (){};
-_.identity = function (x){return x;};
+_.identity = x => x;
 _.toString = ({}).toString;
 
 // 类型判断
