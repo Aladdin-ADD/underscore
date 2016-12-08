@@ -1,0 +1,24 @@
+{
+  "name": "underscore",
+  "version": "0.0.1",
+  "description": "函数式编程 underscore 完整测试",
+  "main": "index.js",
+  "scripts": {
+    "test": "tman",
+    "test-cov": "istanbul cover _tman"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aladdin-ADD/underscore.git"
+  },
+  "keywords": [
+    "underscore",
+    "functional programming"
+  ],
+  "author": "Aladdin-ADD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Aladdin-ADD/underscore/issues"
+  },
+  "homepage": "https://github.com/Aladdin-ADD/underscore#readme"
+}
