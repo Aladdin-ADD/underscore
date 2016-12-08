@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "tman tests/*.js",
-    "test-cov": "istanbul cover _tman"
+    "test-cov": "istanbul cover _tman",
+    "lint": "eslint underscore.js tests/*.js"
   },
   "repository": {
     "type": "git",
