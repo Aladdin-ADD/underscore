@@ -12,7 +12,8 @@
     "dev": "rollup -c -w -f umd -o dist/underscore.umd.js",
     "build:umd": "rollup -c -f umd -o dist/underscore.umd.js",
     "build:browser": "rollup -c --environment DEPS -f umd -o dist/underscore.deps.js",
-    "build:es": "rollup -c -f es6 -o dist/underscore.es.js"
+    "build:es": "rollup -c -f es6 -o dist/underscore.es.js",
+    "prepublish": "npm test && npm run build:es"
   },
   "repository": {
     "type": "git",
