@@ -6,7 +6,8 @@
   "scripts": {
     "test": "tman tests/*.js && npm run lint",
     "test-cov": "istanbul cover _tman",
-    "lint": "eslint underscore.js tests/*.js"
+    "lint": "eslint underscore.js tests/*.js",
+    "build": "babel --plugins transform-es2015-modules-umd underscore.js -s --presets=es2015 -o underscore.min.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,9 @@
   },
   "homepage": "https://github.com/Aladdin-ADD/underscore#readme",
   "devDependencies": {
-    "tman": "latest",
-    "eslint": "latest"
+    "babel-cli": "latest",
+    "babel-plugin-transform-es2015-modules-umd": "^6.18.0",
+    "eslint": "latest",
+    "tman": "latest"
   }
 }
