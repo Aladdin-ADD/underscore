@@ -4,7 +4,7 @@
   "description": "underscore + 完整测试",
   "main": "underscore.js",
   "scripts": {
-    "test": "standard && tman tests/*.js",
+    "test": "standard && node ./node_modules/.bin/istanbul cover tman --colors ./tests/*.js",
     "test-cov": "node node_modules/.bin/istanbul cover tman -- -t 20000",
     "lint": "standard",
     "fix": "standard --fix",
@@ -36,7 +36,7 @@
   "devDependencies": {
     "buble": "latest",
     "eslint": "latest",
-    "istanbul": "latest",
+    "istanbul": "^0.4.5",
     "rollup": "^0.36.3",
     "rollup-plugin-buble": "^0.8.0",
     "rollup-plugin-commonjs": "^2.2.1",
