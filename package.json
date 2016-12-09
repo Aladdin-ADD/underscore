@@ -4,9 +4,10 @@
   "description": "underscore + 完整测试",
   "main": "underscore.js",
   "scripts": {
-    "test": "standard --fix && node ./node_modules/.bin/istanbul cover tman --colors ./tests/*.js",
-    "test-cov": "standard --fix && istanbul cover _tman 'tests/*.js'",
+    "test": "node ./node_modules/.bin/istanbul cover _tman --colors ./tests/*.js",
+    "test-cov": "istanbul cover _tman 'tests/*.js'",
     "coverage": "cat ./coverage/lcov.info | coveralls",
+    "pretest": "npm run fix",
     "lint": "standard",
     "fix": "standard --fix",
     "build": "rollup -c --environment DEPS -f umd -o dist/underscore.js",

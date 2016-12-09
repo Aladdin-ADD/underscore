@@ -1,17 +1,15 @@
 language: node_js
 node_js:
   - "7"
-  - "6"
-  - "5"
-  - "4"
 cache:
   directories:
     - node_modules
 before_script:
-  - npm i
+  - npm i standard
+  - npm i tman
+  - npm i istanbul
 script:
   - npm run test
-  - npm run test-cov
 after_script: "npm install coveralls@2 && cat ./coverage/lcov.info | coveralls"
 #指定分支，只有指定的分支提交时才会运行脚本
 branches:
