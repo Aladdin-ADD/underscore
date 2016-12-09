@@ -5,8 +5,8 @@
   "main": "underscore.js",
   "scripts": {
     "test": "standard && node ./node_modules/.bin/istanbul cover tman --colors ./tests/*.js",
+    "test-cov": "istanbul cover _tman 'tests/*.js'",
     "coverage": "cat ./coverage/lcov.info | coveralls",
-    "test-cov": "node node_modules/.bin/istanbul cover tman -- -t 20000",
     "lint": "standard",
     "fix": "standard --fix",
     "build": "rollup -c --environment DEPS -f umd -o dist/underscore.js",

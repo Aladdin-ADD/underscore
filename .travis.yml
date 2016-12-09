@@ -11,8 +11,8 @@ before_script:
   - npm i
 script:
   - npm run test
-# after_script:
-#   - npm run coverage
+  - npm run test-cov
+after_script: "npm install coveralls@2 && cat ./coverage/lcov.info | coveralls"
 #指定分支，只有指定的分支提交时才会运行脚本
 branches:
   only:
