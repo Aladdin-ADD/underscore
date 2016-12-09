@@ -6,9 +6,11 @@ tman.it('isType test', function () {
   assert.strictEqual(typeof (_.isType('Number')), 'function')
   assert.strictEqual((_.isType('Boolean'), true), true)
 })
-tman.it('_.ø test', function () {
+tman.it('_.ø _.identity test', function () {
   assert.strictEqual(_.ø(1), undefined)
+  assert.strictEqual(_.identity(222), 222)
 })
+
 tman.it('_.toString test', function () {
   assert.strictEqual(typeof (_.toString), 'function')
 })
