@@ -9,6 +9,7 @@ _.toString = ({}).toString;
 // 类型判断
 _.isType = type => val => _.toString.call(val) === '[object ' + type + ']';
 
+_.isObject = _.isType('Object');
 _.isFunc = _.isType('Function');
 _.isArray = _.isType('Array');
 _.isNumber = _.isType('Number');

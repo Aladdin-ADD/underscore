@@ -12,6 +12,11 @@ tman.it('_.toString test', function () {
   assert.strictEqual(typeof(_.toString), 'function');
 });
 
+tman.it('isObject test', function () {
+  assert.strictEqual(_.isObject({}), true);
+  assert.strictEqual(_.isObject(1), false);
+});
+
 tman.it('isFunction test', function () {
   assert.strictEqual(_.isFunc(function (){}), true);
   assert.strictEqual(_.isFunc(1), false);
