@@ -8,7 +8,7 @@ underscore + 完整测试
 ## Demo
 WIP
 ```js
-_.isObject = _.isObject({}); // true
+_.isObject({}); // true
 _.isNumber(1989); // true
 _.isArray([]); // true
 _.isString('1989'); // true
