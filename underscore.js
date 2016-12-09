@@ -1,7 +1,12 @@
-const _ = () => {}
+const _ = function (obj) {
+  if (obj instanceof _) { return obj }
+  if (!(this instanceof _)) { return new _(obj) }
+  this._wrapped = obj
+}
+
 module.exports = _
 
-// 常用的函数
+// 常用函数
 _.ø = () => {}
 _.identity = x => x
 _.toString = ({}).toString

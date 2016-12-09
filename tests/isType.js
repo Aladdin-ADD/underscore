@@ -2,6 +2,10 @@ const assert = require('assert')
 const tman = require('tman')
 const _ = require('../underscore.js')
 
+tman.it('_ test', function () {
+  assert.deepEqual(_(1989), {_wrapped: 1989})
+})
+
 tman.it('isType test', function () {
   assert.strictEqual(typeof (_.isType('Number')), 'function')
   assert.strictEqual((_.isType('Boolean'), true), true)

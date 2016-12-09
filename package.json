@@ -4,8 +4,8 @@
   "description": "underscore + 完整测试",
   "main": "underscore.js",
   "scripts": {
-    "test": "standard && node ./node_modules/.bin/istanbul cover tman --colors ./tests/*.js",
-    "test-cov": "istanbul cover _tman 'tests/*.js'",
+    "test": "standard --fix && node ./node_modules/.bin/istanbul cover tman --colors ./tests/*.js",
+    "test-cov": "standard --fix && istanbul cover _tman 'tests/*.js'",
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "lint": "standard",
     "fix": "standard --fix",
