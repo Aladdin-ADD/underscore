@@ -6,15 +6,14 @@
   "scripts": {
     "test": "istanbul cover _tman 'tests/*.js'",
     "coverage": "cat ./coverage/lcov.info | coveralls",
-    "pretest": "npm run fix",
-    "lint": "standard",
-    "fix": "standard --fix",
+    "fix": "standard --fix | snazzy",
     "build": "rollup -c --environment DEPS -f umd -o dist/underscore.js",
     "build:umd": "rollup -c -f umd -o dist/underscore.umd.js",
     "dev": "rollup -c -w -f umd -o dist/underscore.umd.js",
     "build:browser": "rollup -c --environment DEPS -f umd -o dist/underscore.deps.js",
     "build:es": "rollup -c -f es6 -o dist/underscore.es.js",
-    "prepublish": "npm test && npm run build:es"
+    "prepublish": "npm test && npm run build:es",
+    "commit": "commit-wizard"
   },
   "repository": {
     "type": "git",
@@ -42,6 +41,7 @@
     "rollup-plugin-json": "latest",
     "rollup-plugin-node-resolve": "latest",
     "rollup-watch": "latest",
+    "snazzy": "latest",
     "source-map": "latest",
     "source-map-support": "latest",
     "standard": "latest",
@@ -59,5 +59,15 @@
       "dist",
       "_underscore.js"
     ]
+  },
+  "config": {
+    "pre-git": {
+      "pre-commit": [
+        "npm run fix"
+      ],
+      "pre-push": [
+        "npm run test"
+      ]
+    }
   }
 }
