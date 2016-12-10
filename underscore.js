@@ -53,3 +53,11 @@ _.map = function (arr, fn = _.identity, cxt) {
 _.initial = function (arr, n = arr.length - 1) {
   return n <= arr.length ? arr.slice(0, n) : []
 }
+_.last = function (arr, n) {
+  if (arr === null || arr.length === 0) { return void 0 }
+  if (n <= 0) { return [] }
+  var len = arr.length
+  if (n === undefined) { return arr[len - 1] }
+  if (n > len) { return arr.slice() }
+  return arr.slice(n - 1, len)
+}

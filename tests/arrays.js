@@ -77,3 +77,21 @@ tman.it('_.initial', function () {
   // result = _.map([[1, 2, 3], [1, 2, 3]], _.initial)
   // assert.deepEqual(_.flatten(result), [1, 2, 1, 2], 'works well with _.map')
 })
+
+tman.it('_.last', function () {
+  assert.strictEqual(_.last([1, 2, 3]), 3, 'can pull out the last element of an array')
+  // assert.strictEqual(_([1, 2, 3]).last(), 3, 'can perform OO-style "last()"')
+  assert.deepEqual(_.last([1, 2, 3], 0), [], 'returns an empty array when n <= 0 (0 case)')
+  assert.deepEqual(_.last([1, 2, 3], -1), [], 'returns an empty array when n <= 0 (negative case)')
+  assert.deepEqual(_.last([1, 2, 3], 2), [2, 3], 'can fetch the last n elements')
+  assert.deepEqual(_.last([1, 2, 3], 5), [1, 2, 3], 'returns the whole array if n > length')
+  // var result = (function () { return _(arguments).last() }(1, 2, 3, 4))
+  // assert.strictEqual(result, 4, 'works on an arguments object')
+  var result = _.map([[1, 2, 3], [1, 2, 3]], _.last)
+  assert.deepEqual(result, [3, 3], 'works well with _.map')
+  assert.strictEqual(_.last(null), void 0, 'returns undefined when called on null')
+
+  var arr = []
+  arr[-1] = 'boo'
+  assert.strictEqual(_.last(arr), void 0, 'return undefined when called on a empty array')
+})
