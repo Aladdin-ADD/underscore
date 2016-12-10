@@ -3,3 +3,4 @@
 /coverage/lcov-report/index.html
 .coveralls.yml
 _underscore.js
+npm-debug.log

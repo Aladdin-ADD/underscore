@@ -4,8 +4,7 @@
   "description": "underscore + 完整测试",
   "main": "underscore.js",
   "scripts": {
-    "test": "node ./node_modules/.bin/istanbul cover _tman --colors ./tests/*.js",
-    "test-cov": "istanbul cover _tman 'tests/*.js'",
+    "test": "istanbul cover _tman 'tests/*.js'",
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "pretest": "npm run fix",
     "lint": "standard",
@@ -31,8 +30,7 @@
     "url": "https://github.com/Aladdin-ADD/underscore/issues"
   },
   "bin": {
-    "istanbul": "./node_modules/.bin/istanbul",
-    "eslint": "./node_modules/.bin/eslint"
+    "istanbul": "./node_modules/.bin/istanbul"
   },
   "homepage": "https://github.com/Aladdin-ADD/underscore#readme",
   "devDependencies": {
