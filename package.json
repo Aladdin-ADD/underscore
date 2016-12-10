@@ -28,9 +28,6 @@
   "bugs": {
     "url": "https://github.com/Aladdin-ADD/underscore/issues"
   },
-  "bin": {
-    "istanbul": "./node_modules/.bin/istanbul"
-  },
   "homepage": "https://github.com/Aladdin-ADD/underscore#readme",
   "devDependencies": {
     "buble": "latest",
