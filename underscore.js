@@ -15,6 +15,8 @@ _.identity = x => x
 
 const toString = ({}).toString
 
+// TODO:to support OO-style
+
 // 类型判断
 _.isType = type => val => toString.call(val) === '[object ' + type + ']'
 
