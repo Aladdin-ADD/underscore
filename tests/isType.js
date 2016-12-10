@@ -3,7 +3,9 @@ const tman = require('tman')
 const _ = require('../underscore.js')
 
 tman.it('_ test', function () {
-  assert.deepEqual(_(1989), {_wrapped: 1989})
+  const result = _(1989)
+  assert.deepEqual(result, {_wrapped: 1989})
+  assert.deepEqual(_(result), result)
 })
 
 tman.it('isType test', function () {
