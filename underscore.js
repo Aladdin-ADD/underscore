@@ -41,6 +41,15 @@ _.rest = _.tail = _.drop = function (arr, n = 1) {
   return arr.slice(n)
 }
 
-_.map = function (arr, fn = _.identity) {
-  return arr ? arr.map(fn.bind(arguments[2])) : []
+_.map = function (arr, fn = _.identity, cxt) {
+  if (arr === null) return []
+  let result = []
+  for (let i = 0; i < arr.length; i++) {
+    result[i] = fn.bind(cxt)(arr[i])
+  }
+  return result
+}
+
+_.initial = function (arr, n = arr.length - 1) {
+  return n <= arr.length ? arr.slice(0, n) : []
 }

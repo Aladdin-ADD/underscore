@@ -64,3 +64,16 @@ tman.it('_.map', function () {
   // var people = [{name: 'moe', age: 30}, {name: 'curly', age: 50}]
   // assert.deepEqual(_.map(people, 'name'), ['moe', 'curly'], 'predicate string map to object properties')
 })
+
+tman.it('_.initial', function () {
+  assert.deepEqual(_.initial([1, 2, 3, 4, 5]), [1, 2, 3, 4], 'returns all but the last element')
+  assert.deepEqual(_.initial([1, 2, 3, 4], 2), [1, 2], 'returns all but the last n elements')
+  assert.deepEqual(_.initial([1, 2, 3, 4], 6), [], 'returns an empty array when n > length')
+  // var result = (function () { return _(arguments).initial() }(1, 2, 3, 4))
+  // assert.deepEqual(result, [1, 2, 3], 'works on an arguments object')
+  var result = _.map([[1, 2, 3], [1, 2, 3]], _.initial)
+  assert.deepEqual(result, [[1, 2], [1, 2]], 'works well with _.map')
+
+  // result = _.map([[1, 2, 3], [1, 2, 3]], _.initial)
+  // assert.deepEqual(_.flatten(result), [1, 2, 1, 2], 'works well with _.map')
+})
