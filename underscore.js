@@ -10,12 +10,13 @@ _.version = '0.0.1'
 module.exports = _
 
 // 常用函数
-_.ø = () => {}
+_.noop = () => {}
 _.identity = x => x
 
 const toString = ({}).toString
 
-// TODO:to support OO-style
+// TODO: to support OO-style
+// TODO: to support array-like object
 
 // 类型判断
 _.isType = type => val => toString.call(val) === '[object ' + type + ']'
@@ -36,10 +37,10 @@ _.first = _.head = _.take = function (arr, n = null) {
   return arr.slice(0, n)
 }
 
-_.rest = function (arr, n = 1) {
+_.rest = _.tail = _.drop = function (arr, n = 1) {
   return arr.slice(n)
 }
 
 _.map = function (arr, fn = _.identity) {
-  return arr.map(fn)
+  return arr ? arr.map(fn.bind(arguments[2])) : []
 }

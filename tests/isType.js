@@ -12,8 +12,8 @@ tman.it('isType test', function () {
   assert.strictEqual(typeof (_.isType('Number')), 'function')
   assert.strictEqual((_.isType('Boolean'), true), true)
 })
-tman.it('_.ø _.identity test', function () {
-  assert.strictEqual(_.ø(1), undefined)
+tman.it('_.noop _.identity test', function () {
+  assert.strictEqual(_.noop(1), undefined)
   assert.strictEqual(_.identity(222), 222)
 })
 
