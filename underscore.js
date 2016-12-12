@@ -1,7 +1,9 @@
 const _ = function (obj) {
-  if (obj instanceof _) { return obj }
+  if (Object.getPrototypeOf(obj) === _) { return obj }
   if (!(this instanceof _)) { return new _(obj) }
-  this._wrapped = obj
+  var o = Object.create(_)
+  o._wrapped = obj
+  return o
 }
 
 // Current version.
