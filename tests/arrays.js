@@ -124,8 +124,19 @@ tman.it('_.flatten', function () {
   // assert.strictEqual(_.flatten([new Array(1000000), _.range(56000), 5, 1, 3]).length, 1056003, 'can handle massive arrays')
   // assert.strictEqual(_.flatten([new Array(1000000), _.range(56000), 5, 1, 3], true).length, 1056003, 'can handle massive arrays in shallow mode')
 
-  // var x = _.range(100000)
-  // for (var i = 0; i < 1000; i++) x = [x]
-  // assert.deepEqual(_.flatten(x), _.range(100000), 'can handle very deep arrays')
-  // assert.deepEqual(_.flatten(x, true), x[0], 'can handle very deep arrays in shallow mode')
+// var x = _.range(100000)
+// for (var i = 0; i < 1000; i++) x = [x]
+// assert.deepEqual(_.flatten(x), _.range(100000), 'can handle very deep arrays')
+// assert.deepEqual(_.flatten(x, true), x[0], 'can handle very deep arrays in shallow mode')
+})
+
+tman.it('_.without', function () {
+  var list = [1, 2, 1, 0, 3, 1, 4]
+  assert.deepEqual(_.without(list, 0, 1), [2, 3, 4], 'removes all instances of the given values')
+  var result = (function () { return _.without(arguments, 0, 1) }(1, 2, 1, 0, 3, 1, 4))
+  assert.deepEqual(result, [2, 3, 4], 'works on an arguments object')
+
+  list = [{one: 1}, {two: 2}]
+  assert.deepEqual(_.without(list, {one: 1}), list, 'compares objects by reference (value case)')
+  assert.deepEqual(_.without(list, list[0]), [{two: 2}], 'compares objects by reference (reference case)')
 })

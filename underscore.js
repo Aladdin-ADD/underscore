@@ -83,3 +83,23 @@ _.flatten = function flatten (input, shallow = false, output = []) {
   }
   return output
 }
+
+_.without = function (arr, ...args) {
+  const result = []
+  for (var i = 0, n = arr.length; i < n; i++) {
+    if (!_.contains(args, arr[i])) {
+      result.push(arr[i])
+    }
+  }
+  return result
+}
+
+_.contains = function (arr, val) {
+  for (var i = 0, n = arr.length; i < n; i++) {
+    if (arr[i] === val) {
+      return true
+    }
+  }
+  return false
+}
+
