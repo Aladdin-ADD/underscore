@@ -63,3 +63,11 @@ _.last = function (arr, n) {
   if (n > len) { return arr.slice() }
   return arr.slice(n - 1, len)
 }
+
+_.compact = function (arr) {
+  const result = []
+  for (let i = 0, n = arr.length; i < n; i++) {
+    if (arr[i]) {result.push(arr[i])}
+  }
+  return result
+}
