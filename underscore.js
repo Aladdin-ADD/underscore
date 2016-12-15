@@ -67,7 +67,19 @@ _.last = function (arr, n) {
 _.compact = function (arr) {
   const result = []
   for (let i = 0, n = arr.length; i < n; i++) {
-    if (arr[i]) {result.push(arr[i])}
+    if (arr[i]) { result.push(arr[i]) }
   }
   return result
+}
+
+_.flatten = function flatten (input, shallow = false, output = []) {
+  input = input || []
+  for (let i = 0, n = input.length; i < n; i++) {
+    if (_.isArray(input[i])) {
+      shallow ? output.push(...input[i]) : flatten(input[i], shallow, output)
+    } else {
+      output.push(input[i])
+    }
+  }
+  return output
 }

@@ -17,9 +17,9 @@ tman.it('_.first test', function () {
   // assert.deepEqual(result, [1, 1], 'works well with _.map')
   // assert.strictEqual(_.first(null), void 0, 'returns undefined when called on null')
 
-  // Array.prototype[0] = 'boo'
-  // assert.strictEqual(_.first([]), void 0, 'return undefined when called on a empty array')
-  // delete Array.prototype[0]
+// Array.prototype[0] = 'boo'
+// assert.strictEqual(_.first([]), void 0, 'return undefined when called on a empty array')
+// delete Array.prototype[0]
 })
 
 tman.it('_.first head', function () {
@@ -33,10 +33,10 @@ tman.it('_.rest _.tail drop', function () {
   assert.deepEqual(_.rest(numbers, 2), [3, 4], 'returns elements starting at the given index')
   assert.strictEqual(_.tail, _.rest, 'is an alias for rest')
   assert.strictEqual(_.drop, _.rest, 'is an alias for rest')
-  // var result = (function () { return _(arguments).rest() }(1, 2, 3, 4))
-  // assert.deepEqual(result, [2, 3, 4], 'works on an arguments object')
-  // result = _.map([[1, 2, 3], [1, 2, 3]], _.rest)
-  // assert.deepEqual(_.flatten(result), [2, 3, 2, 3], 'works well with _.map')
+// var result = (function () { return _(arguments).rest() }(1, 2, 3, 4))
+// assert.deepEqual(result, [2, 3, 4], 'works on an arguments object')
+// result = _.map([[1, 2, 3], [1, 2, 3]], _.rest)
+// assert.deepEqual(_.flatten(result), [2, 3, 2, 3], 'works well with _.map')
 })
 
 tman.it('_.map', function () {
@@ -60,9 +60,9 @@ tman.it('_.map', function () {
     return this.length
   }, [5]), [1], 'called with context')
 
-  // // Passing a property name like _.pluck.
-  // var people = [{name: 'moe', age: 30}, {name: 'curly', age: 50}]
-  // assert.deepEqual(_.map(people, 'name'), ['moe', 'curly'], 'predicate string map to object properties')
+// // Passing a property name like _.pluck.
+// var people = [{name: 'moe', age: 30}, {name: 'curly', age: 50}]
+// assert.deepEqual(_.map(people, 'name'), ['moe', 'curly'], 'predicate string map to object properties')
 })
 
 tman.it('_.initial', function () {
@@ -74,8 +74,8 @@ tman.it('_.initial', function () {
   var result = _.map([[1, 2, 3], [1, 2, 3]], _.initial)
   assert.deepEqual(result, [[1, 2], [1, 2]], 'works well with _.map')
 
-  // result = _.map([[1, 2, 3], [1, 2, 3]], _.initial)
-  // assert.deepEqual(_.flatten(result), [1, 2, 1, 2], 'works well with _.map')
+// result = _.map([[1, 2, 3], [1, 2, 3]], _.initial)
+// assert.deepEqual(_.flatten(result), [1, 2, 1, 2], 'works well with _.map')
 })
 
 tman.it('_.last', function () {
@@ -97,9 +97,35 @@ tman.it('_.last', function () {
 })
 
 tman.it('_.compact', function () {
-  assert.deepEqual(_.compact([1, false, null, 0, '', void 0, NaN, 2]), [1, 2], 'removes all falsy values');
-  var result = (function(){ return _.compact(arguments); }(0, 1, false, 2, false, 3));
-  assert.deepEqual(result, [1, 2, 3], 'works on an arguments object');
-  result = _.map([[1, false, false], [false, false, 3]], _.compact);
-  assert.deepEqual(result, [[1], [3]], 'works well with _.map');
+  assert.deepEqual(_.compact([1, false, null, 0, '', void 0, NaN, 2]), [1, 2], 'removes all falsy values')
+  var result = (function () { return _.compact(arguments) }(0, 1, false, 2, false, 3))
+  assert.deepEqual(result, [1, 2, 3], 'works on an arguments object')
+  result = _.map([[1, false, false], [false, false, 3]], _.compact)
+  assert.deepEqual(result, [[1], [3]], 'works well with _.map')
+})
+
+tman.it('_.flatten', function () {
+  assert.deepEqual(_.flatten(null), [], 'supports null')
+  assert.deepEqual(_.flatten(void 0), [], 'supports undefined')
+
+  assert.deepEqual(_.flatten([[], [[]], []]), [], 'supports empty arrays')
+  assert.deepEqual(_.flatten([[], [[]], []], true), [[]], 'can shallowly flatten empty arrays')
+
+  var list = [1, [2], [3, [[[4]]]]]
+  assert.deepEqual(_.flatten(list), [1, 2, 3, 4], 'can flatten nested arrays')
+  assert.deepEqual(_.flatten(list, true), [1, 2, 3, [[[4]]]], 'can shallowly flatten nested arrays')
+  var result = (function () { return _.flatten(arguments) }(1, [2], [3, [[[4]]]]))
+  assert.deepEqual(result, [1, 2, 3, 4], 'works on an arguments object')
+  list = [[1], [2], [3], [[4]]]
+  assert.deepEqual(_.flatten(list, true), [1, 2, 3, [4]], 'can shallowly flatten arrays containing only other arrays')
+
+  // assert.strictEqual(_.flatten([_.range(10), _.range(10), 5, 1, 3], true).length, 23, 'can flatten medium length arrays')
+  // assert.strictEqual(_.flatten([_.range(10), _.range(10), 5, 1, 3]).length, 23, 'can shallowly flatten medium length arrays')
+  // assert.strictEqual(_.flatten([new Array(1000000), _.range(56000), 5, 1, 3]).length, 1056003, 'can handle massive arrays')
+  // assert.strictEqual(_.flatten([new Array(1000000), _.range(56000), 5, 1, 3], true).length, 1056003, 'can handle massive arrays in shallow mode')
+
+  // var x = _.range(100000)
+  // for (var i = 0; i < 1000; i++) x = [x]
+  // assert.deepEqual(_.flatten(x), _.range(100000), 'can handle very deep arrays')
+  // assert.deepEqual(_.flatten(x, true), x[0], 'can handle very deep arrays in shallow mode')
 })
