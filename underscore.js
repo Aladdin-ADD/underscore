@@ -103,3 +103,11 @@ _.contains = function (arr, val) {
   return false
 }
 
+_.sortedIndex = function (arr, val, it = _.identity, cxt) {
+  const fn = _.isFunc(it) ? it : x => (x[it])
+  for (var i = 0, n = arr.length; i < n; i++) {
+    if (fn.call(cxt, arr[i]) >= fn.call(cxt, val)) { return i }
+  }
+  return -1
+}
+

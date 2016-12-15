@@ -140,3 +140,30 @@ tman.it('_.without', function () {
   assert.deepEqual(_.without(list, {one: 1}), list, 'compares objects by reference (value case)')
   assert.deepEqual(_.without(list, list[0]), [{two: 2}], 'compares objects by reference (reference case)')
 })
+
+tman.it('_.sortedIndex', function () {
+  var numbers = [10, 20, 30, 40, 50]
+  var indexFor35 = _.sortedIndex(numbers, 35)
+  assert.strictEqual(indexFor35, 3, 'finds the index at which a value should be inserted to retain order')
+  var indexFor30 = _.sortedIndex(numbers, 30)
+  assert.strictEqual(indexFor30, 2, 'finds the smallest index at which a value could be inserted to retain order')
+
+  var objects = [{x: 10}, {x: 20}, {x: 30}, {x: 40}]
+  var iterator = function (obj) { return obj.x }
+  assert.strictEqual(_.sortedIndex(objects, {x: 25}, iterator), 2, 'uses the result of `iterator` for order comparisons')
+  assert.strictEqual(_.sortedIndex(objects, {x: 35}, 'x'), 3, 'when `iterator` is a string, uses that key for order comparisons')
+
+  var context = {1: 2, 2: 3, 3: 4}
+  iterator = function (obj) { return this[obj] }
+  assert.strictEqual(_.sortedIndex([1, 3], 2, iterator, context), 1, 'can execute its iterator in the given context')
+
+  // var values = [0, 1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383, 32767, 65535, 131071, 262143, 524287,
+  //   1048575, 2097151, 4194303, 8388607, 16777215, 33554431, 67108863, 134217727, 268435455, 536870911, 1073741823, 2147483647]
+  // var largeArray = Array(Math.pow(2, 32) - 1)
+  // var length = values.length
+  // // Sparsely populate `array`
+  // while (length--) {
+  //   largeArray[values[length]] = values[length]
+  // }
+  // assert.strictEqual(_.sortedIndex(largeArray, 2147483648), 2147483648, 'works with large indexes')
+})
