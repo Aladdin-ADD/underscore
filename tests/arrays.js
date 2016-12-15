@@ -156,6 +156,7 @@ tman.it('_.sortedIndex', function () {
   var context = {1: 2, 2: 3, 3: 4}
   iterator = function (obj) { return this[obj] }
   assert.strictEqual(_.sortedIndex([1, 3], 2, iterator, context), 1, 'can execute its iterator in the given context')
+  assert.strictEqual(_.sortedIndex([1, 3], -1, iterator, context), -1, 'can execute its iterator in the given context')
 
   // var values = [0, 1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383, 32767, 65535, 131071, 262143, 524287,
   //   1048575, 2097151, 4194303, 8388607, 16777215, 33554431, 67108863, 134217727, 268435455, 536870911, 1073741823, 2147483647]

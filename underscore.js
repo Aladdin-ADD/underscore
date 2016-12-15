@@ -103,6 +103,7 @@ _.contains = function (arr, val) {
   return false
 }
 
+// TODO: support large-scale array
 _.sortedIndex = function (arr, val, it = _.identity, cxt) {
   const fn = _.isFunc(it) ? it : x => (x[it])
   for (var i = 0, n = arr.length; i < n; i++) {
