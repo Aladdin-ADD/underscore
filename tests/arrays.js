@@ -285,3 +285,39 @@ tman.it('difference', function () {
 
   assert.deepEqual(result, [1, 2, 3], 'restrict the difference to arrays only')
 })
+
+tman.it('zip', function () {
+  var names = ['moe', 'larry', 'curly']
+  var ages = [30, 40, 50]
+  var leaders = [true]
+
+  assert.deepEqual(_.zip(names, ages, leaders), [
+
+      ['moe', 30, true],
+
+      ['larry', 40, void 0],
+
+      ['curly', 50, void 0]
+
+  ], 'zipped together arrays of different lengths')
+
+  var stooges = _.zip(['moe', 30, 'stooge 1'], ['larry', 40, 'stooge 2'], ['curly', 50, 'stooge 3'])
+
+  assert.deepEqual(stooges, [['moe', 'larry', 'curly'], [30, 40, 50], ['stooge 1', 'stooge 2', 'stooge 3']], 'zipped pairs')
+
+    // In the case of different lengths of the tuples, undefined values
+
+    // should be used as placeholder
+
+  stooges = _.zip(['moe', 30], ['larry', 40], ['curly', 50, 'extra data'])
+
+  assert.deepEqual(stooges, [['moe', 'larry', 'curly'], [30, 40, 50], [void 0, void 0, 'extra data']], 'zipped pairs with empties')
+
+  var empty = _.zip([])
+
+  assert.deepEqual(empty, [], 'unzipped empty')
+
+  assert.deepEqual(_.zip(null), [], 'handles null')
+
+  assert.deepEqual(_.zip(), [], '_.zip() returns []')
+})

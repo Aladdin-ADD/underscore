@@ -163,3 +163,13 @@ _.difference = function (arr, ...args) {
   }
   return result
 }
+
+_.zip = function (...args) {
+  if (args.length === 1 && args[0] === null) return []
+  const result = []
+  const len = Math.max(...args.map(x => x.length))
+  for (let i = 0; i < len; i++) {
+    result.push(args.map(x => x[i]))
+  }
+  return result
+}
