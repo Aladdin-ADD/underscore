@@ -94,9 +94,9 @@ _.without = function (arr, ...args) {
   return result
 }
 
-_.contains = function (arr, val) {
+_.contains = function (arr, val, cb = _.identity) {
   for (var i = 0, n = arr.length; i < n; i++) {
-    if (arr[i] === val) {
+    if (cb(arr[i]) === cb(val)) {
       return true
     }
   }
@@ -112,28 +112,31 @@ _.sortedIndex = function (arr, val, it = _.identity, cxt) {
   return -1
 }
 
-// _.uniq = function (arr, isSorted, it, cxt) {
-//   // 重载
-//   if (!_.isBoolean(isSorted)) {
-//     cxt = it
-//     it = isSorted
-//     isSorted = false
-//   }
-//   it = _.isString(it) ? (x => x[it]) : (it || _.identity)
-//   const _mem = {}
-//   const result = []
-//   isSorted && arr && arr.length && result.push(arr[0])
-//   for (let i = 0, n = arr.length; i < n; i++) {
-//     if (isSorted) {
-//       var len = result.length;
-//       const last = result[len - 1]
-//       if (it(last) !== it(arr[i])) {result.push(arr[i])}
-//     } else {
-//       if (_mem[it(arr[i])] === undefined) {
-//         _mem[it(arr[i])] = true
-//         result.push(arr[i])
-//       }
-//     }
-//   }
-//   return result
-// }
+_.uniq = function (arr, isSorted, it, cxt) {
+  // 重载
+  if (!_.isBoolean(isSorted)) {
+    cxt = it
+    it = isSorted
+    isSorted = false
+  }
+  const _it = _.isString(it) ? x => x[it] : it
+  const result = []
+  for (let i = 0, n = arr.length; i < n; i++) {
+    if (!_.contains(result, arr[i], _it)) {
+      result.push(arr[i])
+    }
+  }
+  return result
+}
+
+_.intersection = function (arr1, arr2) {
+  arr1 = arr1 || []
+  arr2 = arr2 || []
+  const result = [];
+  for (let i = 0, n = arr1.length; i < n; i++) {
+    if (_.contains(arr2, arr1[i]) && !_.contains(result, arr1[i])) {
+      result.push(arr1[i])
+    }
+  }
+  return result
+}
