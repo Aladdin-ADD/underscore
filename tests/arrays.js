@@ -158,15 +158,15 @@ tman.it('_.sortedIndex', function () {
   assert.strictEqual(_.sortedIndex([1, 3], 2, iterator, context), 1, 'can execute its iterator in the given context')
   assert.strictEqual(_.sortedIndex([1, 3], -1, iterator, context), -1, 'can execute its iterator in the given context')
 
-  // var values = [0, 1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383, 32767, 65535, 131071, 262143, 524287,
-  //   1048575, 2097151, 4194303, 8388607, 16777215, 33554431, 67108863, 134217727, 268435455, 536870911, 1073741823, 2147483647]
-  // var largeArray = Array(Math.pow(2, 32) - 1)
-  // var length = values.length
-  // // Sparsely populate `array`
-  // while (length--) {
-  //   largeArray[values[length]] = values[length]
-  // }
-  // assert.strictEqual(_.sortedIndex(largeArray, 2147483648), 2147483648, 'works with large indexes')
+// var values = [0, 1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383, 32767, 65535, 131071, 262143, 524287,
+//   1048575, 2097151, 4194303, 8388607, 16777215, 33554431, 67108863, 134217727, 268435455, 536870911, 1073741823, 2147483647]
+// var largeArray = Array(Math.pow(2, 32) - 1)
+// var length = values.length
+// // Sparsely populate `array`
+// while (length--) {
+//   largeArray[values[length]] = values[length]
+// }
+// assert.strictEqual(_.sortedIndex(largeArray, 2147483648), 2147483648, 'works with large indexes')
 })
 
 tman.it('_.uniq', function () {
@@ -182,7 +182,7 @@ tman.it('_.uniq', function () {
   var iterator = function (stooge) { return stooge.name }
   assert.deepEqual(_.uniq(list, false, iterator), expected, 'uses the result of `iterator` for uniqueness comparisons (unsorted case)')
   assert.deepEqual(_.uniq(list, iterator), expected, '`sorted` argument defaults to false when omitted')
-  assert.deepEqual(_.uniq(list, 'name'), expected, 'when `iterator` is a string, uses that key for comparisons (unsorted case)');
+  assert.deepEqual(_.uniq(list, 'name'), expected, 'when `iterator` is a string, uses that key for comparisons (unsorted case)')
 
   list = [{ score: 8 }, { score: 10 }, { score: 10 }]
   expected = [{ score: 8 }, { score: 10 }]
@@ -190,47 +190,98 @@ tman.it('_.uniq', function () {
   assert.deepEqual(_.uniq(list, true, iterator), expected, 'uses the result of `iterator` for uniqueness comparisons (sorted case)')
   assert.deepEqual(_.uniq(list, true, 'score'), expected, 'when `iterator` is a string, uses that key for comparisons (sorted case)')
 
-  // assert.deepEqual(_.uniq([{ 0: 1 }, { 0: 1 }, { 0: 1 }, { 0: 2 }], 0), [{ 0: 1 }, { 0: 2 }], 'can use falsy pluck like iterator');
-  // var result = (function () { return _.uniq(arguments); } (1, 2, 1, 3, 1, 4));
-  // assert.deepEqual(result, [1, 2, 3, 4], 'works on an arguments object');
-  // var a = {}, b = {}, c = {};
+  // assert.deepEqual(_.uniq([{ 0: 1 }, { 0: 1 }, { 0: 1 }, { 0: 2 }], 0), [{ 0: 1 }, { 0: 2 }], 'can use falsy pluck like iterator')
+  // var result = (function () { return _.uniq(arguments); } (1, 2, 1, 3, 1, 4))
+  // assert.deepEqual(result, [1, 2, 3, 4], 'works on an arguments object')
+  // var a = {}, b = {}, c = {}
 
-  // assert.deepEqual(_.uniq([a, b, a, b, c]), [a, b, c], 'works on values that can be tested for equivalency but not ordered');
-  // assert.deepEqual(_.uniq(null), [], 'returns an empty array when `array` is not iterable');
-  // var context = {};
-  // list = [3];
-  // _.uniq(list, function (value, index, array) {
-  //   assert.strictEqual(this, context, 'executes its iterator in the given context');
-  //   assert.strictEqual(value, 3, 'passes its iterator the value');
-  //   assert.strictEqual(index, 0, 'passes its iterator the index');
-  //   assert.strictEqual(array, list, 'passes its iterator the entire array');
-  // }, context);
+// assert.deepEqual(_.uniq([a, b, a, b, c]), [a, b, c], 'works on values that can be tested for equivalency but not ordered')
+// assert.deepEqual(_.uniq(null), [], 'returns an empty array when `array` is not iterable')
+// var context = {}
+// list = [3]
+// _.uniq(list, function (value, index, array) {
+//   assert.strictEqual(this, context, 'executes its iterator in the given context')
+//   assert.strictEqual(value, 3, 'passes its iterator the value')
+//   assert.strictEqual(index, 0, 'passes its iterator the index')
+//   assert.strictEqual(array, list, 'passes its iterator the entire array')
+// }, context)
 })
 
 tman.it('_.intersection', function () {
-    var stooges = ['moe', 'curly', 'larry'], leaders = ['moe', 'groucho'];
+  var stooges = ['moe', 'curly', 'larry']
+  var leaders = ['moe', 'groucho']
 
-    assert.deepEqual(_.intersection(stooges, leaders), ['moe'], 'can find the set intersection of two arrays');
+  assert.deepEqual(_.intersection(stooges, leaders), ['moe'], 'can find the set intersection of two arrays')
 
-    // assert.deepEqual(_(stooges).intersection(leaders), ['moe'], 'can perform an OO-style intersection');
+  // assert.deepEqual(_(stooges).intersection(leaders), ['moe'], 'can perform an OO-style intersection')
 
-    // var result = (function(){ return _.intersection(arguments, leaders); }('moe', 'curly', 'larry'));
+  var result = (function () { return _.intersection(arguments, leaders) }('moe', 'curly', 'larry'))
 
-    // assert.deepEqual(result, ['moe'], 'works on an arguments object');
+  // assert.deepEqual(result, ['moe'], 'works on an arguments object')
 
-    var theSixStooges = ['moe', 'moe', 'curly', 'curly', 'larry', 'larry'];
+  var theSixStooges = ['moe', 'moe', 'curly', 'curly', 'larry', 'larry']
 
-    assert.deepEqual(_.intersection(theSixStooges, leaders), ['moe'], 'returns a duplicate-free array');
+  assert.deepEqual(_.intersection(theSixStooges, leaders), ['moe'], 'returns a duplicate-free array')
 
-    result = _.intersection([2, 4, 3, 1], [1, 2, 3]);
+  result = _.intersection([2, 4, 3, 1], [1, 2, 3])
 
-    assert.deepEqual(result, [2, 3, 1], 'preserves the order of the first array');
+  assert.deepEqual(result, [2, 3, 1], 'preserves the order of the first array')
 
-    result = _.intersection(null, [1, 2, 3]);
+  result = _.intersection(null, [1, 2, 3])
 
-    assert.deepEqual(result, [], 'returns an empty array when passed null as the first argument');
+  assert.deepEqual(result, [], 'returns an empty array when passed null as the first argument')
 
-    result = _.intersection([1, 2, 3], null);
+  result = _.intersection([1, 2, 3], null)
 
-    assert.deepEqual(result, [], 'returns an empty array when passed null as an argument beyond the first');
+  assert.deepEqual(result, [], 'returns an empty array when passed null as an argument beyond the first')
+})
+
+tman.it('_.union', function () {
+  var result = _.union([1, 2, 3], [2, 30, 1], [1, 40])
+
+  assert.deepEqual(result, [1, 2, 3, 30, 40], 'can find the union of a list of arrays')
+
+  // result = _([1, 2, 3]).union([2, 30, 1], [1, 40])
+
+  // assert.deepEqual(result, [1, 2, 3, 30, 40], 'can perform an OO-style union')
+
+  result = _.union([1, 2, 3], [2, 30, 1], [1, 40, [1]])
+
+  assert.deepEqual(result, [1, 2, 3, 30, 40, [1]], 'can find the union of a list of nested arrays')
+
+  result = _.union([10, 20], [1, 30, 10], [0, 40])
+
+  assert.deepEqual(result, [10, 20, 1, 30, 0, 40], 'orders values by their first encounter')
+
+  result = (function () { return _.union(arguments, [2, 30, 1], [1, 40]) }(1, 2, 3))
+
+  assert.deepEqual(result, [1, 2, 3, 30, 40], 'works on an arguments object')
+
+  assert.deepEqual(_.union([1, 2, 3], 4), [1, 2, 3], 'restricts the union to arrays only')
+})
+
+tman.it('difference', function () {
+  var result = _.difference([1, 2, 3], [2, 30, 40])
+
+  assert.deepEqual(result, [1, 3], 'can find the difference of two arrays')
+
+  // result = _([1, 2, 3]).difference([2, 30, 40])
+
+  // assert.deepEqual(result, [1, 3], 'can perform an OO-style difference')
+
+  result = _.difference([1, 2, 3, 4], [2, 30, 40], [1, 11, 111])
+
+  assert.deepEqual(result, [3, 4], 'can find the difference of three arrays')
+
+  result = _.difference([8, 9, 3, 1], [3, 8])
+
+  assert.deepEqual(result, [9, 1], 'preserves the order of the first array')
+
+  result = (function () { return _.difference(arguments, [2, 30, 40]) }(1, 2, 3))
+
+  assert.deepEqual(result, [1, 3], 'works on an arguments object')
+
+  result = _.difference([1, 2, 3], 1)
+
+  assert.deepEqual(result, [1, 2, 3], 'restrict the difference to arrays only')
 })

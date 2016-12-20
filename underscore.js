@@ -12,7 +12,8 @@ _.version = '0.0.1'
 module.exports = _
 
 // 常用函数
-_.noop = () => {}
+_.noop = () => {
+}
 _.identity = x => x
 
 const toString = ({}).toString
@@ -132,10 +133,32 @@ _.uniq = function (arr, isSorted, it, cxt) {
 _.intersection = function (arr1, arr2) {
   arr1 = arr1 || []
   arr2 = arr2 || []
-  const result = [];
+  const result = []
   for (let i = 0, n = arr1.length; i < n; i++) {
     if (_.contains(arr2, arr1[i]) && !_.contains(result, arr1[i])) {
       result.push(arr1[i])
+    }
+  }
+  return result
+}
+
+_.union = function (...args) {
+  const result = []
+  for (let i = 0, n = args.length; i < n; i++) {
+    for (let j = 0, m = args[i].length; j < m; j++) {
+      if (!_.contains(result, args[i][j])) {
+        result.push(args[i][j])
+      }
+    }
+  }
+  return result
+}
+
+_.difference = function (arr, ...args) {
+  const result = []
+  for (let i = 0, n = arr.length; i < n; i++) {
+    if (!_.contains(result, arr[i]) && args.every(function (item) { return !_.contains(item, arr[i]) })) {
+      result.push(arr[i])
     }
   }
   return result
