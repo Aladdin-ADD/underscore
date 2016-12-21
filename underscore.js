@@ -12,9 +12,8 @@ _.version = '0.0.1'
 module.exports = _
 
 // 常用函数
-_.noop = () => {
-}
-_.identity = x => x
+_.noop = function () {}
+_.identity = function (x) { return x }
 
 const toString = ({}).toString
 
