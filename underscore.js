@@ -229,3 +229,16 @@ _.lastIndexOf = function (arr, val, fromIndex) {
   }
   return -1
 }
+
+_.findLastIndex = function (objects, fn, cxt) {
+  objects = objects || []
+  let _fn = fn
+  if (_.isString(fn)) { _fn = x => x[fn] }
+  for (var i = objects.length - 1; i >= 0; i--) {
+    if (_fn.call(cxt, objects[i], i, objects)) {
+      return i
+    }
+  }
+  return -1
+}
+
