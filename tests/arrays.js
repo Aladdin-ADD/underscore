@@ -154,7 +154,7 @@ tman.it('_.sortedIndex', function () {
   assert.strictEqual(_.sortedIndex(objects, {x: 35}, 'x'), 3, 'when `iterator` is a string, uses that key for order comparisons')
 
   var context = {1: 2, 2: 3, 3: 4}
-  iterator = function (obj) { return this[obj] }
+  iterator = function (obj) { return this[obj]}
   assert.strictEqual(_.sortedIndex([1, 3], 2, iterator, context), 1, 'can execute its iterator in the given context')
   assert.strictEqual(_.sortedIndex([1, 3], -1, iterator, context), -1, 'can execute its iterator in the given context')
 
@@ -293,11 +293,11 @@ tman.it('zip', function () {
 
   assert.deepEqual(_.zip(names, ages, leaders), [
 
-      ['moe', 30, true],
+    ['moe', 30, true],
 
-      ['larry', 40, void 0],
+    ['larry', 40, void 0],
 
-      ['curly', 50, void 0]
+    ['curly', 50, void 0]
 
   ], 'zipped together arrays of different lengths')
 
@@ -305,9 +305,9 @@ tman.it('zip', function () {
 
   assert.deepEqual(stooges, [['moe', 'larry', 'curly'], [30, 40, 50], ['stooge 1', 'stooge 2', 'stooge 3']], 'zipped pairs')
 
-    // In the case of different lengths of the tuples, undefined values
+  // In the case of different lengths of the tuples, undefined values
 
-    // should be used as placeholder
+  // should be used as placeholder
 
   stooges = _.zip(['moe', 30], ['larry', 40], ['curly', 50, 'extra data'])
 
@@ -320,4 +320,17 @@ tman.it('zip', function () {
   assert.deepEqual(_.zip(null), [], 'handles null')
 
   assert.deepEqual(_.zip(), [], '_.zip() returns []')
+})
+
+tman.it('_.unzip', function () {
+  assert.deepEqual(_.unzip(null), [], 'handles null')
+
+  assert.deepEqual(_.unzip([['a', 'b'], [1, 2]]), [['a', 1], ['b', 2]])
+
+  // complements zip
+  var zipped = _.zip(['fred', 'barney'], [30, 40], [true, false])
+  assert.deepEqual(_.unzip(zipped), [['fred', 'barney'], [30, 40], [true, false]])
+
+  zipped = _.zip(['moe', 30], ['larry', 40], ['curly', 50, 'extra data'])
+  assert.deepEqual(_.unzip(zipped), [['moe', 30, void 0], ['larry', 40, void 0], ['curly', 50, 'extra data']], 'Uses length of largest array')
 })
