@@ -183,3 +183,13 @@ _.unzip = function (arr) {
   }
   return result
 }
+
+_.object = function (arr1, arr2) {
+  const result = {}
+  if (arr2) {
+    arr1.forEach(function (item, index) { result[item] = arr2[index] })
+  } else {
+    arr1.forEach(function (item, index) { result[item[0]] = item[1] })
+  }
+  return result
+}

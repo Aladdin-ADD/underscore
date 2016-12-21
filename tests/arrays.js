@@ -334,3 +334,18 @@ tman.it('_.unzip', function () {
   zipped = _.zip(['moe', 30], ['larry', 40], ['curly', 50, 'extra data'])
   assert.deepEqual(_.unzip(zipped), [['moe', 30, void 0], ['larry', 40, void 0], ['curly', 50, 'extra data']], 'Uses length of largest array')
 })
+
+tman.it('_.object', function () {
+  var result = _.object(['moe', 'larry', 'curly'], [30, 40, 50])
+  var shouldBe = {moe: 30, larry: 40, curly: 50}
+  assert.deepEqual(result, shouldBe, 'two arrays zipped together into an object')
+
+  result = _.object([['one', 1], ['two', 2], ['three', 3]])
+  shouldBe = {one: 1, two: 2, three: 3}
+  assert.deepEqual(result, shouldBe, 'an array of pairs zipped together into an object')
+
+  // var stooges = {moe: 30, larry: 40, curly: 50}
+  // assert.deepEqual(_.object(_.pairs(stooges)), stooges, 'an object converted to pairs and back to an object')
+
+// assert.deepEqual(_.object(null), {}, 'handles nulls')
+})
