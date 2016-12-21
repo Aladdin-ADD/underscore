@@ -154,7 +154,7 @@ tman.it('_.sortedIndex', function () {
   assert.strictEqual(_.sortedIndex(objects, {x: 35}, 'x'), 3, 'when `iterator` is a string, uses that key for order comparisons')
 
   var context = {1: 2, 2: 3, 3: 4}
-  iterator = function (obj) { return this[obj]}
+  iterator = function (obj) { return this[obj] }
   assert.strictEqual(_.sortedIndex([1, 3], 2, iterator, context), 1, 'can execute its iterator in the given context')
   assert.strictEqual(_.sortedIndex([1, 3], -1, iterator, context), -1, 'can execute its iterator in the given context')
 

@@ -35,7 +35,7 @@ _.isUndefined = _.isType('Undefined')
 
 _.first = _.head = _.take = function (arr, n = null) {
   if (arr === null || arr.length < 0) { return void 0 }
-  if (n === null) { return arr[0]}
+  if (n === null) { return arr[0] }
   if (n <= 0) { return [] }
   return arr.slice(0, n)
 }
@@ -44,7 +44,7 @@ _.rest = _.tail = _.drop = function (arr, n = 1) {
   return arr.slice(n)
 }
 
-_.map = function (arr, fn = _.identity , cxt) {
+_.map = function (arr, fn = _.identity, cxt) {
   if (arr === null) return []
   let result = []
   for (let i = 0; i < arr.length; i++) {
@@ -59,7 +59,7 @@ _.initial = function (arr, n = arr.length - 1) {
 _.last = function (arr, n) {
   if (arr === null || arr.length === 0) { return void 0 }
   const len = arr.length
-  if (n === undefined) { return arr[len - 1]}
+  if (n === undefined) { return arr[len - 1] }
   if (n <= 0) { return [] }
   if (n > len) { return arr.slice() }
   return arr.slice(n - 1, len)
@@ -73,7 +73,7 @@ _.compact = function (arr) {
   return result
 }
 
-_.flatten = function flatten (input, shallow = false , output = []) {
+_.flatten = function flatten (input, shallow = false, output = []) {
   input = input || []
   for (let i = 0, n = input.length; i < n; i++) {
     if (_.isArray(input[i])) {
@@ -105,7 +105,7 @@ _.contains = function (arr, val, cb = _.identity) {
 }
 
 // TODO: support large-scale array
-_.sortedIndex = function (arr, val, it = _.identity , cxt) {
+_.sortedIndex = function (arr, val, it = _.identity, cxt) {
   const fn = _.isFunc(it) ? it : x => (x[it])
   for (var i = 0, n = arr.length; i < n; i++) {
     if (fn.call(cxt, arr[i]) >= fn.call(cxt, val)) { return i }
