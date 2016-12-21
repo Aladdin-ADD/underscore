@@ -193,3 +193,25 @@ _.object = function (arr1, arr2) {
   }
   return result
 }
+
+_.indexOf = function (arr, val, fromIndex = false) {
+  return _.isBoolean(fromIndex)
+    ? (fromIndex ? bSearch(arr, val, 0, arr.length - 1) : search(arr, val))
+    : (search(arr, val, fromIndex))
+}
+
+function bSearch (arr, val, sm, lg) {
+  if (sm > lg) { return -1 }
+  if (lg === sm) { return arr[sm] === val ? sm : -1 }
+  const md = Math.floor((sm + lg) / 2)
+  return arr[md] >= val ? bSearch(arr, val, sm, md) : bSearch(arr, val, md + 1, lg)
+}
+
+function search (arr, val, fromIndex = 0) {
+  if (fromIndex < 0) { fromIndex = arr.length + fromIndex }
+  for (let i = fromIndex, n = arr.length; i < n; i++) {
+    // 需要检查NaN,NaN !== NaN
+    if (arr[i] === val || (arr[i] !== arr[i] && val !== val)) { return i }
+  }
+  return -1
+}
