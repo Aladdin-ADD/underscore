@@ -4,7 +4,7 @@
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg)](https://opensource.org/licenses/mit-license.php)   
 # underscore
 ===
-underscore + 完整测试
+underscore + 100%测试
 
 ## Demo
 WIP

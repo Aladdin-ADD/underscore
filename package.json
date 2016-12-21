@@ -1,7 +1,7 @@
 {
   "name": "underscore",
   "version": "0.0.1",
-  "description": "underscore + 完整测试",
+  "description": "underscore + 100%",
   "main": "underscore.js",
   "scripts": {
     "test": "istanbul cover _tman 'tests/*.js'",
