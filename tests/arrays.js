@@ -448,16 +448,109 @@ tman.it('indexOf with +- 0', function () {
   // })
 })
 
-tman.test('indexOf with NaN', function () {
-  assert.strictEqual(_.indexOf([1, 2, NaN, NaN], NaN), 2, 'Expected [1, 2, NaN] to contain NaN')
+tman.it('lastIndexOf', function () {
+  var numbers = [1, 0, 1]
 
-  assert.strictEqual(_.indexOf([1, 2, Infinity], NaN), -1, 'Expected [1, 2, NaN] to contain NaN')
+  var falsy = [void 0, '', 0, false, NaN, null, void 0]
 
-  assert.strictEqual(_.indexOf([1, 2, NaN, NaN], NaN, 1), 2, 'startIndex does not affect result')
+  assert.strictEqual(_.lastIndexOf(numbers, 1), 2)
 
-  assert.strictEqual(_.indexOf([1, 2, NaN, NaN], NaN, -2), 2, 'startIndex does not affect result');
+  numbers = [1, 0, 1, 0, 0, 1, 0, 0, 0]
+
+  numbers.lastIndexOf = null
+
+  assert.strictEqual(_.lastIndexOf(numbers, 1), 5, 'can compute lastIndexOf, even without the native function')
+
+  assert.strictEqual(_.lastIndexOf(numbers, 0), 8, 'lastIndexOf the other element')
+
+  var result = (function () { return _.lastIndexOf(arguments, 1) }(1, 0, 1, 0, 0, 1, 0, 0, 0))
+
+  assert.strictEqual(result, 5, 'works on an arguments object')
+
+  // _.each([null, void 0, [], false], function (val) {
+  //     var msg = 'Handles: ' + (_.isArray(val) ? '[]' : val)
+
+  //     assert.strictEqual(_.lastIndexOf(val, 2), -1, msg)
+
+  //     assert.strictEqual(_.lastIndexOf(val, 2, -1), -1, msg)
+
+  //     assert.strictEqual(_.lastIndexOf(val, 2, -20), -1, msg)
+
+  //     assert.strictEqual(_.lastIndexOf(val, 2, 15), -1, msg)
+  //   })
+
+  numbers = [1, 2, 3, 1, 2, 3, 1, 2, 3]
+
+  var index = _.lastIndexOf(numbers, 2, 2)
+
+  assert.strictEqual(index, 1, 'supports the fromIndex argument')
+
+  var array = [1, 2, 3, 1, 2, 3]
+
+  assert.strictEqual(_.lastIndexOf(array, 1, 0), 0, 'starts at the correct from idx')
+
+  assert.strictEqual(_.lastIndexOf(array, 3), 5, 'should return the index of the last matched value')
+
+  assert.strictEqual(_.lastIndexOf(array, 4), -1, 'should return `-1` for an unmatched value')
+
+  assert.strictEqual(_.lastIndexOf(array, 1, 2), 0, 'should work with a positive `fromIndex`')
+
+  // _.each([6, 8, Math.pow(2, 32), Infinity], function (fromIndex) {
+  //   assert.strictEqual(_.lastIndexOf(array, void 0, fromIndex), -1)
+
+  //   assert.strictEqual(_.lastIndexOf(array, 1, fromIndex), 3)
+
+  //   assert.strictEqual(_.lastIndexOf(array, '', fromIndex), -1)
+  // })
+
+  var expected = _.map(falsy, function (value) {
+    return typeof value === 'number' ? -1 : 5
+  })
+
+  var actual = _.map(falsy, function (fromIndex) {
+    return _.lastIndexOf(array, 3, fromIndex)
+  })
+
+  assert.deepEqual(actual, expected, 'should treat falsy `fromIndex` values, except `0` and `NaN`, as `array.length`')
+
+  assert.strictEqual(_.lastIndexOf(array, 3, '1'), 5, 'should treat non-number `fromIndex` values as `array.length`')
+
+  assert.strictEqual(_.lastIndexOf(array, 3, true), 5, 'should treat non-number `fromIndex` values as `array.length`')
+
+  assert.strictEqual(_.lastIndexOf(array, 2, -3), 1, 'should work with a negative `fromIndex`')
+
+  assert.strictEqual(_.lastIndexOf(array, 1, -3), 3, 'neg `fromIndex` starts at the right index')
+
+  assert.deepEqual(_.map([-6, -8, -Infinity], function (fromIndex) {
+    return _.lastIndexOf(array, 1, fromIndex)
+  }), [0, -1, -1])
+})
+
+tman.it('lastIndexOf with NaN', function () {
+  assert.strictEqual(_.lastIndexOf([1, 2, NaN, NaN], NaN), 3, 'Expected [1, 2, NaN] to contain NaN')
+
+  assert.strictEqual(_.lastIndexOf([1, 2, Infinity], NaN), -1, 'Expected [1, 2, NaN] to contain NaN')
+
+  assert.strictEqual(_.lastIndexOf([1, 2, NaN, NaN], NaN, 2), 2, 'fromIndex does not affect result')
+
+  assert.strictEqual(_.lastIndexOf([1, 2, NaN, NaN], NaN, -2), 2, 'fromIndex does not affect result');
 
   (function () {
-    assert.strictEqual(_.indexOf(arguments, NaN), 2, 'Expected arguments [1, 2, NaN] to contain NaN')
+    assert.strictEqual(_.lastIndexOf(arguments, NaN), 3, 'Expected arguments [1, 2, NaN] to contain NaN')
   }(1, 2, NaN, NaN))
+})
+
+tman.it('lastIndexOf with +- 0', function () {
+  var val = +0
+  assert.strictEqual(_.lastIndexOf([1, 2, val, val], val), 3)
+  val = -0
+  assert.strictEqual(_.lastIndexOf([1, 2, val, val], val), 3)
+  val = +0
+  assert.strictEqual(_.lastIndexOf([1, 2, val, val], -val), 3)
+  val = -0
+  assert.strictEqual(_.lastIndexOf([1, 2, val, val], -val), 3)
+  val = +0
+  assert.strictEqual(_.lastIndexOf([-1, 1, 2], -val), -1)
+  val = -0
+  assert.strictEqual(_.lastIndexOf([-1, 1, 2], -val), -1)
 })

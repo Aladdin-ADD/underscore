@@ -215,3 +215,17 @@ function search (arr, val, fromIndex = 0) {
   }
   return -1
 }
+
+_.lastIndexOf = function (arr, val, fromIndex) {
+  if (fromIndex === 0) { return arr[0] === val ? 0 : -1 }
+  const falsy = [void 0, '', 0, false, NaN, null, void 0]
+  if (_.contains(falsy, fromIndex)) { fromIndex = arr.length }
+  if (!_.isNumber(fromIndex)) { fromIndex = arr.length }
+  if (fromIndex < 0) { fromIndex = arr.length + fromIndex }
+  for (let i = fromIndex; i >= 0; i--) {
+    if (arr[i] === val || (arr[i] !== arr[i] && val !== val)) {
+      return i
+    }
+  }
+  return -1
+}
