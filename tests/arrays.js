@@ -611,44 +611,44 @@ tman.it('findLastIndex', function () {
   assert.strictEqual(_.findLastIndex(array, function (x) { return x === 55 }), -1, 'doesn\'t match array-likes keys')
 })
 
-// tman.it('range', function () {
-//   assert.deepEqual(_.range(0), [], 'range with 0 as a first argument generates an empty array')
+tman.it('range', function () {
+  assert.deepEqual(_.range(0), [], 'range with 0 as a first argument generates an empty array')
 
-//   assert.deepEqual(_.range(4), [0, 1, 2, 3], 'range with a single positive argument generates an array of elements 0,1,2,...,n-1')
+  assert.deepEqual(_.range(4), [0, 1, 2, 3], 'range with a single positive argument generates an array of elements 0,1,2,...,n-1')
 
-//   assert.deepEqual(_.range(5, 8), [5, 6, 7], 'range with two arguments a &amp; b, a&lt;b generates an array of elements a,a+1,a+2,...,b-2,b-1')
+  assert.deepEqual(_.range(5, 8), [5, 6, 7], 'range with two arguments a &amp; b, a&lt;b generates an array of elements a,a+1,a+2,...,b-2,b-1')
 
-//   assert.deepEqual(_.range(3, 10, 3), [3, 6, 9], 'range with three arguments a &amp; b &amp; c, c &lt; b-a, a &lt; b generates an array of elements a,a+c,a+2c,...,b - (multiplier of a) &lt; c')
+  assert.deepEqual(_.range(3, 10, 3), [3, 6, 9], 'range with three arguments a &amp; b &amp; c, c &lt; b-a, a &lt; b generates an array of elements a,a+c,a+2c,...,b - (multiplier of a) &lt; c')
 
-//   assert.deepEqual(_.range(3, 10, 15), [3], 'range with three arguments a &amp; b &amp; c, c &gt; b-a, a &lt; b generates an array with a single element, equal to a')
+  assert.deepEqual(_.range(3, 10, 15), [3], 'range with three arguments a &amp; b &amp; c, c &gt; b-a, a &lt; b generates an array with a single element, equal to a')
 
-//   assert.deepEqual(_.range(12, 7, -2), [12, 10, 8], 'range with three arguments a &amp; b &amp; c, a &gt; b, c &lt; 0 generates an array of elements a,a-c,a-2c and ends with the number not less than b')
+  assert.deepEqual(_.range(12, 7, -2), [12, 10, 8], 'range with three arguments a &amp; b &amp; c, a &gt; b, c &lt; 0 generates an array of elements a,a-c,a-2c and ends with the number not less than b')
 
-//   assert.deepEqual(_.range(0, -10, -1), [0, -1, -2, -3, -4, -5, -6, -7, -8, -9], 'final example in the Python docs')
+  assert.deepEqual(_.range(0, -10, -1), [0, -1, -2, -3, -4, -5, -6, -7, -8, -9], 'final example in the Python docs')
 
-//   assert.strictEqual(1 / _.range(-0, 1)[0], -Infinity, 'should preserve -0')
+  assert.strictEqual(1 / _.range(-0, 1)[0], -Infinity, 'should preserve -0')
 
-//   assert.deepEqual(_.range(8, 5), [8, 7, 6], 'negative range generates descending array')
+  assert.deepEqual(_.range(8, 5), [8, 7, 6], 'negative range generates descending array')
 
-//   assert.deepEqual(_.range(-3), [0, -1, -2], 'negative range generates descending array')
-// })
+  assert.deepEqual(_.range(-3), [0, -1, -2], 'negative range generates descending array')
+})
 
-// tman.it('chunk', function () {
-//   assert.deepEqual(_.chunk([], 2), [], 'chunk for empty array returns an empty array')
+tman.it('chunk', function () {
+  assert.deepEqual(_.chunk([], 2), [], 'chunk for empty array returns an empty array')
 
-//   assert.deepEqual(_.chunk([1, 2, 3], 0), [], 'chunk into parts of 0 elements returns empty array')
+  assert.deepEqual(_.chunk([1, 2, 3], 0), [], 'chunk into parts of 0 elements returns empty array')
 
-//   assert.deepEqual(_.chunk([1, 2, 3], -1), [], 'chunk into parts of negative amount of elements returns an empty array')
+  assert.deepEqual(_.chunk([1, 2, 3], -1), [], 'chunk into parts of negative amount of elements returns an empty array')
 
-//   assert.deepEqual(_.chunk([1, 2, 3]), [], 'defaults to empty array (chunk size 0)')
+  assert.deepEqual(_.chunk([1, 2, 3]), [], 'defaults to empty array (chunk size 0)')
 
-//   assert.deepEqual(_.chunk([1, 2, 3], 1), [[1], [2], [3]], 'chunk into parts of 1 elements returns original array')
+  assert.deepEqual(_.chunk([1, 2, 3], 1), [[1], [2], [3]], 'chunk into parts of 1 elements returns original array')
 
-//   assert.deepEqual(_.chunk([1, 2, 3], 3), [[1, 2, 3]], 'chunk into parts of current array length elements returns the original array')
+  assert.deepEqual(_.chunk([1, 2, 3], 3), [[1, 2, 3]], 'chunk into parts of current array length elements returns the original array')
 
-//   assert.deepEqual(_.chunk([1, 2, 3], 5), [[1, 2, 3]], 'chunk into parts of more then current array length elements returns the original array')
+  assert.deepEqual(_.chunk([1, 2, 3], 5), [[1, 2, 3]], 'chunk into parts of more then current array length elements returns the original array')
 
-//   assert.deepEqual(_.chunk([10, 20, 30, 40, 50, 60, 70], 2), [[10, 20], [30, 40], [50, 60], [70]], 'chunk into parts of less then current array length elements')
+  assert.deepEqual(_.chunk([10, 20, 30, 40, 50, 60, 70], 2), [[10, 20], [30, 40], [50, 60], [70]], 'chunk into parts of less then current array length elements')
 
-//   assert.deepEqual(_.chunk([10, 20, 30, 40, 50, 60, 70], 3), [[10, 20, 30], [40, 50, 60], [70]], 'chunk into parts of less then current array length elements')
-// })
+  assert.deepEqual(_.chunk([10, 20, 30, 40, 50, 60, 70], 3), [[10, 20, 30], [40, 50, 60], [70]], 'chunk into parts of less then current array length elements')
+})

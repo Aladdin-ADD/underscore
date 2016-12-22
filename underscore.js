@@ -241,3 +241,23 @@ _.findLastIndex = function (objects, fn, cxt) {
   return -1
 }
 
+_.range = function (...args) {
+  const result = []
+  let start, end, step
+  if (args.length === 1) { start = 0; end = args[0]; step = start <= end ? 1 : -1 }
+  if (args.length > 1) { start = args[0]; end = args[1]; step = args[2] || (start <= end ? 1 : -1) }
+  let fn = (start <= end) ? (s, e) => (s < e) : (s, e) => (s > e)
+  for (let i = start; fn(i, end); i += step) {
+    result.push(i)
+  }
+  return result
+}
+
+_.chunk = function (arr, cnt) {
+  const result = []
+  if (cnt == null || cnt < 1) return result
+  for (let i = 0, n = arr.length; i < n; i += cnt) {
+    result.push(arr.slice(i, i + cnt))
+  }
+  return result
+}
