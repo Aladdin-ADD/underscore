@@ -5,6 +5,9 @@
   "main": "underscore.js",
   "scripts": {
     "test": "istanbul cover _tman 'tests/*.js'",
+    "test-all": "npm run test",
+    "test-array": "istanbul cover _tman 'tests/arrays.js'",
+    "test-function": "istanbul cover _tman 'tests/functions.js'",
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "fix": "standard --fix | snazzy",
     "build": "rollup -c --environment DEPS -f umd -o dist/underscore.js",

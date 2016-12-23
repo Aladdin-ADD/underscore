@@ -261,3 +261,10 @@ _.chunk = function (arr, cnt) {
   }
   return result
 }
+
+// functions def:
+_.bind = function (fn, cxt) {
+  return function () {
+    return fn.apply(cxt, arguments)
+  }
+}
