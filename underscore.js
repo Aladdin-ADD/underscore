@@ -263,8 +263,40 @@ _.chunk = function (arr, cnt) {
 }
 
 // functions def:
-_.bind = function (fn, cxt) {
-  return function () {
-    return fn.apply(cxt, arguments)
+_.bind = function (fn, cxt, ...args) {
+  // if (!_.isFunc(fn)) { throw new TypeError('Bind must be called on a function') }
+  function bound (..._args) {
+    const _cxt = typeof new.target !== 'undefined' ? this : cxt
+    return fn.apply(_cxt, args.concat(_args))
+  }
+  bound.prototype = Object.create(fn.prototype)
+  return bound
+}
+
+_.partial = function (fn, ...args) {
+  return function (..._args) {
+    const result = []
+    const m = args.length
+    let n = _args.length
+    for (let i = 0, j = 0; i + j < m + n; i++) {
+      if (args[i] === _) {
+        result[i] = _args[j++]
+      } else if (i >= m) {
+        result[i] = j < n ? _args[j++] : void 0
+      } else {
+        result[i] = args[i]
+      }
+    }
+    return fn.apply(this, result)
   }
 }
+
+var func = _.partial(function () { return arguments.length }, _, 'b', _, 'd')
+func(1, 2, 3, 4, 5)
+func('a')
+
+var obj = {name: 'moe'}
+var func = function (...args) { return this.name + ' ' + args.join(' ') }
+
+obj.func = _.partial(func, 'a', 'b')
+obj.func('c', 'd')
