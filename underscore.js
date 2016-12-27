@@ -274,13 +274,14 @@ _.bind = function (fn, cxt, ...args) {
 }
 
 _.partial = function (fn, ...args) {
-  return function (..._args) {
+  function _partial (..._args) {
     const result = []
     const m = args.length
     let n = _args.length
-    for (let i = 0, j = 0; i + j < m + n; i++) {
-      if (args[i] === _) {
+    for (let i = 0, j = 0, k = 0; i < m || i < m + n - k; i++) {
+      if (args[i] === _.partial.placeholder) {
         result[i] = _args[j++]
+        k++
       } else if (i >= m) {
         result[i] = j < n ? _args[j++] : void 0
       } else {
@@ -289,14 +290,14 @@ _.partial = function (fn, ...args) {
     }
     return fn.apply(this, result)
   }
+  _partial.prototype = Object.create(fn.prototype)
+  return _partial
 }
+// set default placeholder to _
+_.partial.placeholder = _
 
-var func = _.partial(function () { return arguments.length }, _, 'b', _, 'd')
-func(1, 2, 3, 4, 5)
-func('a')
-
-var obj = {name: 'moe'}
-var func = function (...args) { return this.name + ' ' + args.join(' ') }
-
-obj.func = _.partial(func, 'a', 'b')
-obj.func('c', 'd')
+_.bindAll = function (obj, ...args) {
+  args.forEach(function (key) {
+    obj[key] = _.bind(obj[key], obj)
+  })
+}
