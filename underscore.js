@@ -301,3 +301,14 @@ _.bindAll = function (obj, ...args) {
     obj[key] = _.bind(obj[key], obj)
   })
 }
+
+_.memoize = function (fn, h) {
+  function memoize (...args) {
+    const key = h && h(...args) || args.join()
+    const cached = key in memoize.cache && memoize.cache.hasOwnProperty(key)
+    /* eslint no-return-assign: 0 */
+    return cached ? memoize.cache[key] : memoize.cache[key] = fn.apply(null, args)
+  }
+  memoize.cache = {}
+  return memoize
+}
