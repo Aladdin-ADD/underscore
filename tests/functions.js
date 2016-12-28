@@ -175,19 +175,21 @@ tman.it('memoize', function () {
   assert.strictEqual(myObj, myObjAlias, 'object is cached if second argument used as key')
   assert.strictEqual(myObj.value, 'a', 'object is not modified if second argument used as key')
 })
-
-tman.it('delay', function () {
-  assert.expect(2)
-  var done = assert.async()
+// TODO: support async test
+tman.it('delay', function (done) {
+  // assert.expect(2)
+  // var done = assert.async()
   var delayed = false
-  _.delay(function () { delayed = true }, 100)
-  setTimeout(function () { assert.notOk(delayed, "didn't delay the function quite yet") }, 50)
+  _.delay(function () {
+    delayed = true
+  }, 100)
+  setTimeout(function () { assert.ok(!delayed, "didn't delay the function quite yet") }, 50)
   setTimeout(function () { assert.ok(delayed, 'delayed the function'); done() }, 150)
 })
 
-tman.it('defer', function () {
-  assert.expect(1)
-  var done = assert.async()
+tman.it('defer', function (done) {
+  // assert.expect(1)
+  // var done = assert.async()
   var deferred = false
   _.defer(function (bool) { deferred = bool }, true)
   _.delay(function () { assert.ok(deferred, 'deferred the function'); done() }, 50)

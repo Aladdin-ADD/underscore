@@ -312,3 +312,12 @@ _.memoize = function (fn, h) {
   memoize.cache = {}
   return memoize
 }
+
+_.delay = function (fn, timeout, ...args) {
+  return setTimeout(() => { fn(...args) }, timeout)
+}
+
+_.defer = function (fn, ...args) {
+  return _.delay(fn, 0, ...args)
+}
+
