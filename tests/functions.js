@@ -195,9 +195,9 @@ tman.it('defer', function (done) {
   _.delay(function () { assert.ok(deferred, 'deferred the function'); done() }, 50)
 })
 
-tman.it('throttle', function () {
-  assert.expect(2)
-  var done = assert.async()
+tman.it('throttle', function (done) {
+  // assert.expect(2)
+  // var done = assert.async()
   var counter = 0
   var incr = function () { counter++ }
   var throttledIncr = _.throttle(incr, 32)
@@ -207,9 +207,9 @@ tman.it('throttle', function () {
   _.delay(function () { assert.strictEqual(counter, 2, 'incr was throttled'); done() }, 64)
 })
 
-tman.it('throttle arguments', function () {
-  assert.expect(2)
-  var done = assert.async()
+tman.it('throttle arguments', function (done) {
+  // assert.expect(2)
+  // var done = assert.async()
   var value = 0
   var update = function (val) { value = val }
   var throttledUpdate = _.throttle(update, 32)
@@ -219,9 +219,9 @@ tman.it('throttle arguments', function () {
   _.delay(function () { assert.strictEqual(value, 3, 'updated to latest value'); done() }, 96)
 })
 
-tman.it('throttle once', function () {
-  assert.expect(2)
-  var done = assert.async()
+tman.it('throttle once', function (done) {
+  // assert.expect(2)
+  // var done = assert.async()
   var counter = 0
   var incr = function () { return ++counter }
   var throttledIncr = _.throttle(incr, 32)
@@ -232,9 +232,9 @@ tman.it('throttle once', function () {
   }, 64)
 })
 
-tman.it('throttle twice', function () {
-  assert.expect(1)
-  var done = assert.async()
+tman.it('throttle twice', function (done) {
+  // assert.expect(1)
+  // var done = assert.async()
   var counter = 0
   var incr = function () { counter++ }
   var throttledIncr = _.throttle(incr, 32)
@@ -242,9 +242,9 @@ tman.it('throttle twice', function () {
   _.delay(function () { assert.strictEqual(counter, 2, 'incr was called twice'); done() }, 64)
 })
 
-tman.it('more throttling', function () {
-  assert.expect(3)
-  var done = assert.async()
+tman.it('more throttling', function (done) {
+  // assert.expect(3)
+  // var done = assert.async()
   var counter = 0
   var incr = function () { counter++ }
   var throttledIncr = _.throttle(incr, 30)
@@ -258,9 +258,7 @@ tman.it('more throttling', function () {
   }, 85)
 })
 
-tman.it('throttle repeatedly with results', function () {
-  assert.expect(6)
-  var done = assert.async()
+tman.it('throttle repeatedly with results', function (done) {
   var counter = 0
   var incr = function () { return ++counter }
   var throttledIncr = _.throttle(incr, 100)
@@ -282,9 +280,9 @@ tman.it('throttle repeatedly with results', function () {
   }, 300)
 })
 
-tman.it('throttle triggers trailing call when invoked repeatedly', function () {
-  assert.expect(2)
-  var done = assert.async()
+tman.it('throttle triggers trailing call when invoked repeatedly', function (done) {
+  // assert.expect(2)
+  // var done = assert.async()
   var counter = 0
   var limit = 48
   var incr = function () { counter++ }
@@ -303,9 +301,9 @@ tman.it('throttle triggers trailing call when invoked repeatedly', function () {
   }, 96)
 })
 
-tman.it('throttle does not trigger leading call when leading is set to false', function () {
-  assert.expect(2)
-  var done = assert.async()
+tman.it('throttle does not trigger leading call when leading is set to false', function (done) {
+  // assert.expect(2)
+  // var done = assert.async()
   var counter = 0
   var incr = function () { counter++ }
   var throttledIncr = _.throttle(incr, 60, {leading: false})
@@ -319,9 +317,9 @@ tman.it('throttle does not trigger leading call when leading is set to false', f
   }, 96)
 })
 
-tman.it('more throttle does not trigger leading call when leading is set to false', function () {
-  assert.expect(3)
-  var done = assert.async()
+tman.it('more throttle does not trigger leading call when leading is set to false', function (done) {
+  // assert.expect(3)
+  // var done = assert.async()
   var counter = 0
   var incr = function () { counter++ }
   var throttledIncr = _.throttle(incr, 100, {leading: false})
@@ -342,9 +340,9 @@ tman.it('more throttle does not trigger leading call when leading is set to fals
   }, 350)
 })
 
-tman.it('one more throttle with leading: false test', function () {
-  assert.expect(2)
-  var done = assert.async()
+tman.it('one more throttle with leading: false test', function (done) {
+  // assert.expect(2)
+  // var done = assert.async()
   var counter = 0
   var incr = function () { counter++ }
   var throttledIncr = _.throttle(incr, 100, {leading: false})
@@ -359,9 +357,9 @@ tman.it('one more throttle with leading: false test', function () {
   }, 200)
 })
 
-tman.it('throttle does not trigger trailing call when trailing is set to false', function () {
-  assert.expect(4)
-  var done = assert.async()
+tman.it('throttle does not trigger trailing call when trailing is set to false', function (done) {
+  // assert.expect(4)
+  // var done = assert.async()
   var counter = 0
   var incr = function () { counter++ }
   var throttledIncr = _.throttle(incr, 60, {trailing: false})
@@ -382,9 +380,9 @@ tman.it('throttle does not trigger trailing call when trailing is set to false',
   }, 96)
 })
 
-tman.it('throttle continues to function after system time is set backwards', function () {
-  assert.expect(2)
-  var done = assert.async()
+tman.it('throttle continues to function after system time is set backwards', function (done) {
+  // assert.expect(2)
+  // var done = assert.async()
   var counter = 0
   var incr = function () { counter++ }
   var throttledIncr = _.throttle(incr, 100)
@@ -404,9 +402,9 @@ tman.it('throttle continues to function after system time is set backwards', fun
   }, 200)
 })
 
-tman.it('throttle re-entrant', function () {
-  assert.expect(2)
-  var done = assert.async()
+tman.it('throttle re-entrant', function (done) {
+  // assert.expect(2)
+  // var done = assert.async()
   var sequence = [
     ['b1', 'b2'],
     ['c1', 'c2']
@@ -429,8 +427,8 @@ tman.it('throttle re-entrant', function () {
   }, 100)
 })
 
-tman.it('throttle cancel', function () {
-  var done = assert.async()
+tman.it('throttle cancel', function (done) {
+  // var done = assert.async()
   var counter = 0
   var incr = function () { counter++ }
   var throttledIncr = _.throttle(incr, 32)
@@ -443,8 +441,8 @@ tman.it('throttle cancel', function () {
   _.delay(function () { assert.strictEqual(counter, 3, 'incr was throttled'); done() }, 64)
 })
 
-tman.it('throttle cancel with leading: false', function () {
-  var done = assert.async()
+tman.it('throttle cancel with leading: false', function (done) {
+  // var done = assert.async()
   var counter = 0
   var incr = function () { counter++ }
   var throttledIncr = _.throttle(incr, 32, {leading: false})
@@ -455,9 +453,9 @@ tman.it('throttle cancel with leading: false', function () {
   _.delay(function () { assert.strictEqual(counter, 0, 'incr was throttled'); done() }, 64)
 })
 
-tman.it('debounce', function () {
-  assert.expect(1)
-  var done = assert.async()
+tman.it('debounce', function (done) {
+  // assert.expect(1)
+  // var done = assert.async()
   var counter = 0
   var incr = function () { counter++ }
   var debouncedIncr = _.debounce(incr, 32)
@@ -466,9 +464,9 @@ tman.it('debounce', function () {
   _.delay(function () { assert.strictEqual(counter, 1, 'incr was debounced'); done() }, 96)
 })
 
-tman.it('debounce cancel', function () {
-  assert.expect(1)
-  var done = assert.async()
+tman.it('debounce cancel', function (done) {
+  // assert.expect(1)
+  // var done = assert.async()
   var counter = 0
   var incr = function () { counter++ }
   var debouncedIncr = _.debounce(incr, 32)
@@ -477,9 +475,9 @@ tman.it('debounce cancel', function () {
   _.delay(function () { assert.strictEqual(counter, 0, 'incr was not called'); done() }, 96)
 })
 
-tman.it('debounce asap', function () {
-  assert.expect(6)
-  var done = assert.async()
+tman.it('debounce asap', function (done) {
+  // assert.expect(6)
+  // var done = assert.async()
   var a, b, c
   var counter = 0
   var incr = function () { return ++counter }
@@ -501,9 +499,9 @@ tman.it('debounce asap', function () {
   }, 128)
 })
 
-tman.it('debounce asap cancel', function () {
-  assert.expect(4)
-  var done = assert.async()
+tman.it('debounce asap cancel', function (done) {
+  // assert.expect(4)
+  // var done = assert.async()
   var a, b
   var counter = 0
   var incr = function () { return ++counter }
@@ -520,9 +518,9 @@ tman.it('debounce asap cancel', function () {
   _.delay(function () { assert.strictEqual(counter, 2, 'incr was debounced'); done() }, 128)
 })
 
-tman.it('debounce asap recursively', function () {
-  assert.expect(2)
-  var done = assert.async()
+tman.it('debounce asap recursively', function (done) {
+  // assert.expect(2)
+  // var done = assert.async()
   var counter = 0
   var debouncedIncr = _.debounce(function () {
     counter++
@@ -533,9 +531,9 @@ tman.it('debounce asap recursively', function () {
   _.delay(function () { assert.strictEqual(counter, 1, 'incr was debounced'); done() }, 96)
 })
 
-tman.it('debounce after system time is set backwards', function () {
-  assert.expect(2)
-  var done = assert.async()
+tman.it('debounce after system time is set backwards', function (done) {
+  // assert.expect(2)
+  // var done = assert.async()
   var counter = 0
   var origNowFunc = _.now
   var debouncedIncr = _.debounce(function () {
@@ -557,9 +555,9 @@ tman.it('debounce after system time is set backwards', function () {
   }, 200)
 })
 
-tman.it('debounce re-entrant', function () {
-  assert.expect(2)
-  var done = assert.async()
+tman.it('debounce re-entrant', function (done) {
+  // assert.expect(2)
+  // var done = assert.async()
   var sequence = [
     ['b1', 'b2']
   ]
