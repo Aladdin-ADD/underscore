@@ -461,7 +461,7 @@ _.once = function (fn) {
   let result
   let ret = function () {
     if (!ret.__called) {
-      ret.__called = true;
+      ret.__called = true
       return result = fn()
     }
     return result

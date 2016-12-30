@@ -61,7 +61,7 @@ tman.it('partial', function () {
   assert.strictEqual(func('a', 'c', 'e'), 5, 'accepts more arguments than the number of placeholders')
   assert.strictEqual(func('a'), 4, 'accepts fewer arguments than the number of placeholders')
 
-  func = _.partial(function () { return typeof arguments[2]}, _, 'b', _, 'd')
+  func = _.partial(function () { return typeof arguments[2] }, _, 'b', _, 'd')
   assert.strictEqual(func('a'), 'undefined', 'unfilled placeholders are undefined')
 
   // passes context
