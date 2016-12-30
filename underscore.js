@@ -468,3 +468,49 @@ _.once = function (fn) {
   }
   return ret
 }
+
+_.wrap = function (func, wrapper) {
+  return _.partial(wrapper, func)
+}
+
+_.negate = function (predicate) {
+  return function () {
+    return !predicate.apply(this, arguments)
+  }
+}
+
+_.compose = function () {
+  var args = arguments
+  var start = args.length - 1
+  return function () {
+    var i = start
+    var result = args[start].apply(this, arguments)
+    while (i--) result = args[i].call(this, result)
+    return result
+  }
+}
+
+// Returns a function that will only be executed on and after the Nth call.
+_.after = function (times, func) {
+  return function () {
+    if (--times < 1) {
+      return func.apply(this, arguments)
+    }
+  }
+}
+
+// Returns a function that will only be executed up to (but not including) the Nth call.
+_.before = function (times, func) {
+  var memo
+  return function () {
+    if (--times > 0) {
+      memo = func.apply(this, arguments)
+    }
+    if (times <= 1) func = null
+    return memo
+  }
+}
+
+// _.iteratee = builtinIteratee = function(value, context) {
+//   return cb(value, context, Infinity);
+// };
