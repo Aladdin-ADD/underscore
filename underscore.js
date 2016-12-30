@@ -210,7 +210,7 @@ function search (arr, val, fromIndex = 0) {
   if (fromIndex < 0) { fromIndex = arr.length + fromIndex }
   for (let i = fromIndex, n = arr.length; i < n; i++) {
     // 需要检查NaN,NaN !== NaN
-    if (arr[i] === val || (arr[i] !== arr[i] && val !== val)) { return i }
+    if (arr[i] === val || (arr[i] !== arr[i] && val !== val)) { return i } // eslint-disable-line
   }
   return -1
 }
@@ -222,7 +222,7 @@ _.lastIndexOf = function (arr, val, fromIndex) {
   if (!_.isNumber(fromIndex)) { fromIndex = arr.length }
   if (fromIndex < 0) { fromIndex = arr.length + fromIndex }
   for (let i = fromIndex; i >= 0; i--) {
-    if (arr[i] === val || (arr[i] !== arr[i] && val !== val)) {
+    if (arr[i] === val || (arr[i] !== arr[i] && val !== val)) { // eslint-disable-line
       return i
     }
   }
@@ -261,3 +261,257 @@ _.chunk = function (arr, cnt) {
   }
   return result
 }
+
+// functions def:
+_.bind = function (fn, cxt, ...args) {
+  // if (!_.isFunc(fn)) { throw new TypeError('Bind must be called on a function') }
+  function bound (..._args) {
+    const _cxt = typeof new.target !== 'undefined' ? this : cxt
+    return fn.apply(_cxt, args.concat(_args))
+  }
+  bound.prototype = Object.create(fn.prototype)
+  return bound
+}
+
+_.partial = function (fn, ...args) {
+  function _partial (..._args) {
+    const result = []
+    const m = args.length
+    let n = _args.length
+    for (let i = 0, j = 0, k = 0; i < m || i < m + n - k; i++) {
+      if (args[i] === _.partial.placeholder) {
+        result[i] = _args[j++]
+        k++
+      } else if (i >= m) {
+        result[i] = j < n ? _args[j++] : void 0
+      } else {
+        result[i] = args[i]
+      }
+    }
+    return fn.apply(this, result)
+  }
+  _partial.prototype = Object.create(fn.prototype)
+  return _partial
+}
+// set default placeholder to _
+_.partial.placeholder = _
+
+_.bindAll = function (obj, ...args) {
+  args.forEach(function (key) {
+    obj[key] = _.bind(obj[key], obj)
+  })
+}
+
+_.memoize = function (fn, h) {
+  function memoize (...args) {
+    const key = h && h(...args) || args.join()
+    const cached = key in memoize.cache && memoize.cache.hasOwnProperty(key)
+    /* eslint no-return-assign: 0 */
+    return cached ? memoize.cache[key] : memoize.cache[key] = fn.apply(null, args)
+  }
+  memoize.cache = {}
+  return memoize
+}
+
+_.delay = function (fn, timeout, ...args) {
+  return setTimeout(() => { fn(...args) }, timeout)
+}
+
+_.defer = function (fn, ...args) {
+  return _.delay(fn, 0, ...args)
+}
+
+_.now = Date.now
+// TODO: fix throttle
+// _.throttle = function (fn, wait) {
+//   let previous = 0
+//   let timeout = null
+//   let result
+//   return function _throttle (...args) {
+//     if (!previous) { previous = _.now(); return fn(...args) }
+//     const now = _.now()
+//     const left = wait - (now - previous)
+//     if (left <= 0 || left > wait) {
+//       timeout && clearTimeout(timeout)
+//       timeout = null
+//       previous = _.now()
+//       result = fn(...args)
+//     } else if (!timeout) {
+//       timeout = _.delay(fn, left, ...args)
+//     }
+//     return result
+//   }
+// }
+_.throttle = function (func, wait, options) {
+  var context, args, result
+  var timeout = null
+  // 上次执行时间点
+  var previous = 0
+  if (!options) options = {}
+  // 延迟执行函数
+  var later = function () {
+    // 若设定了开始边界不执行选项，上次执行时间始终为0
+    previous = options.leading === false ? 0 : _.now()
+    timeout = null
+    result = func.apply(context, args)
+    if (!timeout) context = args = null
+  }
+  function throttled () {
+    var now = _.now()
+    // 首次执行时，如果设定了开始边界不执行选项，将上次执行时间设定为当前时间。
+    if (!previous && options.leading === false) previous = now
+    // 延迟执行时间间隔
+    var remaining = wait - (now - previous)
+    context = this
+    args = arguments
+    // 延迟时间间隔remaining小于等于0，表示上次执行至此所间隔时间已经超过一个时间窗口
+    // remaining大于时间窗口wait，表示客户端系统时间被调整过
+    if (remaining <= 0 || remaining > wait) {
+      clearTimeout(timeout)
+      timeout = null
+      previous = now
+      result = func.apply(context, args)
+      if (!timeout) context = args = null
+    // 如果延迟执行不存在，且没有设定结尾边界不执行选项
+    } else if (!timeout && options.trailing !== false) {
+      timeout = setTimeout(later, remaining)
+    }
+    return result
+  }
+
+  throttled.cancel = function () {
+    clearTimeout(timeout)
+    previous = 0
+    timeout = context = args = null
+  }
+
+  return throttled
+}
+
+  // Returns a function, that, as long as it continues to be invoked, will not
+
+  // be triggered. The function will be called after it stops being called for
+
+  // N milliseconds. If `immediate` is passed, trigger the function on the
+
+  // leading edge, instead of the trailing.
+
+_.debounce = function (func, wait, immediate) {
+  var timeout, result
+
+  var later = function (context, args) {
+    timeout = null
+
+    if (args) result = func.apply(context, args)
+  }
+
+  var debounced = _.restArgs(function (args) {
+    if (timeout) clearTimeout(timeout)
+
+    if (immediate) {
+      var callNow = !timeout
+
+      timeout = setTimeout(later, wait)
+
+      if (callNow) result = func.apply(this, args)
+    } else {
+      timeout = _.delay(later, wait, this, args)
+    }
+
+    return result
+  })
+
+  debounced.cancel = function () {
+    clearTimeout(timeout)
+
+    timeout = null
+  }
+
+  return debounced
+}
+
+_.restArgs = function (func, startIndex) {
+  startIndex = startIndex == null ? func.length - 1 : +startIndex
+
+  return function () {
+    var length = Math.max(arguments.length - startIndex, 0)
+    var rest = Array(length)
+    var index = 0
+
+    for (; index < length; index++) {
+      rest[index] = arguments[index + startIndex]
+    }
+
+    switch (startIndex) {
+      case 0: return func.call(this, rest)
+      case 1: return func.call(this, arguments[0], rest)
+      case 2: return func.call(this, arguments[0], arguments[1], rest)
+    }
+
+    var args = Array(startIndex + 1)
+    for (index = 0; index < startIndex; index++) {
+      args[index] = arguments[index]
+    }
+    args[startIndex] = rest
+    return func.apply(this, args)
+  }
+}
+
+_.once = function (fn) {
+  let result
+  let ret = function () {
+    if (!ret.__called) {
+      ret.__called = true
+      return result = fn()
+    }
+    return result
+  }
+  return ret
+}
+
+_.wrap = function (func, wrapper) {
+  return _.partial(wrapper, func)
+}
+
+_.negate = function (predicate) {
+  return function () {
+    return !predicate.apply(this, arguments)
+  }
+}
+
+_.compose = function () {
+  var args = arguments
+  var start = args.length - 1
+  return function () {
+    var i = start
+    var result = args[start].apply(this, arguments)
+    while (i--) result = args[i].call(this, result)
+    return result
+  }
+}
+
+// Returns a function that will only be executed on and after the Nth call.
+_.after = function (times, func) {
+  return function () {
+    if (--times < 1) {
+      return func.apply(this, arguments)
+    }
+  }
+}
+
+// Returns a function that will only be executed up to (but not including) the Nth call.
+_.before = function (times, func) {
+  var memo
+  return function () {
+    if (--times > 0) {
+      memo = func.apply(this, arguments)
+    }
+    if (times <= 1) func = null
+    return memo
+  }
+}
+
+// _.iteratee = builtinIteratee = function(value, context) {
+//   return cb(value, context, Infinity)
+// }
+

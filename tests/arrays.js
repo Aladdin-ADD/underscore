@@ -402,7 +402,7 @@ tman.it('indexOf', function () {
 
   assert.strictEqual(index, 7, 'supports the fromIndex argument')
 
-  index = _.indexOf([,,, 0], void 0)
+  index = _.indexOf([,,, 0], void 0) // eslint-disable-line
 
   assert.strictEqual(index, 0, 'treats sparse arrays as if they were dense')
 
