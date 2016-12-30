@@ -405,7 +405,7 @@ _.debounce = function (func, wait, immediate) {
     if (args) result = func.apply(context, args)
   }
 
-  var debounced = restArgs(function (args) {
+  var debounced = _.restArgs(function (args) {
     if (timeout) clearTimeout(timeout)
 
     if (immediate) {
@@ -430,7 +430,7 @@ _.debounce = function (func, wait, immediate) {
   return debounced
 }
 
-var restArgs = function (func, startIndex) {
+_.restArgs = function (func, startIndex) {
   startIndex = startIndex == null ? func.length - 1 : +startIndex
 
   return function () {
@@ -455,4 +455,16 @@ var restArgs = function (func, startIndex) {
     args[startIndex] = rest
     return func.apply(this, args)
   }
+}
+
+_.once = function (fn) {
+  let result
+  let ret = function () {
+    if (!ret.__called) {
+      ret.__called = true;
+      return result = fn()
+    }
+    return result
+  }
+  return ret
 }

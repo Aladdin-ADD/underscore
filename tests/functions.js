@@ -8,8 +8,8 @@ tman.it('bind', function () {
   var bound = _.bind(func, context)
   assert.strictEqual(bound(), 'name: moe', 'can bind a function to a context')
 
-//   bound = _(func).bind(context)
-//   assert.strictEqual(bound(), 'name: moe', 'can do OO-style binding')
+  //   bound = _(func).bind(context)
+  //   assert.strictEqual(bound(), 'name: moe', 'can do OO-style binding')
 
   bound = _.bind(func, null, 'curly')
   // var result = bound()
@@ -44,7 +44,7 @@ tman.it('bind', function () {
   assert.strictEqual(boundf().hello, 'moe curly', "When called without the new operator, it's OK to be bound to the context")
   assert.ok(newBoundf instanceof F, 'a bound instance is an instance of the original function')
 
-  // assert.raises(function () { _.bind('notafunction') }, TypeError, 'throws an error when binding to a non-function')
+// assert.raises(function () { _.bind('notafunction') }, TypeError, 'throws an error when binding to a non-function')
 })
 
 tman.it('partial', function () {
@@ -61,7 +61,7 @@ tman.it('partial', function () {
   assert.strictEqual(func('a', 'c', 'e'), 5, 'accepts more arguments than the number of placeholders')
   assert.strictEqual(func('a'), 4, 'accepts fewer arguments than the number of placeholders')
 
-  func = _.partial(function () { return typeof arguments[2] }, _, 'b', _, 'd')
+  func = _.partial(function () { return typeof arguments[2]}, _, 'b', _, 'd')
   assert.strictEqual(func('a'), 'undefined', 'unfilled placeholders are undefined')
 
   // passes context
@@ -740,7 +740,7 @@ tman.it('iteratee', function () {
 })
 
 tman.it('restArgs', function () {
-  assert.expect(10)
+  // assert.expect(10)
   _.restArgs(function (a, args) {
     assert.strictEqual(a, 1)
     assert.deepEqual(args, [2, 3], 'collects rest arguments into an array')
