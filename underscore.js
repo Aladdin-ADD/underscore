@@ -210,7 +210,7 @@ function search (arr, val, fromIndex = 0) {
   if (fromIndex < 0) { fromIndex = arr.length + fromIndex }
   for (let i = fromIndex, n = arr.length; i < n; i++) {
     // 需要检查NaN,NaN !== NaN
-    if (arr[i] === val || (arr[i] !== arr[i] && val !== val)) { return i }
+    if (arr[i] === val || (arr[i] !== arr[i] && val !== val)) { return i } // eslint-disable-line
   }
   return -1
 }
@@ -222,7 +222,7 @@ _.lastIndexOf = function (arr, val, fromIndex) {
   if (!_.isNumber(fromIndex)) { fromIndex = arr.length }
   if (fromIndex < 0) { fromIndex = arr.length + fromIndex }
   for (let i = fromIndex; i >= 0; i--) {
-    if (arr[i] === val || (arr[i] !== arr[i] && val !== val)) {
+    if (arr[i] === val || (arr[i] !== arr[i] && val !== val)) { // eslint-disable-line
       return i
     }
   }
@@ -512,5 +512,6 @@ _.before = function (times, func) {
 }
 
 // _.iteratee = builtinIteratee = function(value, context) {
-//   return cb(value, context, Infinity);
-// };
+//   return cb(value, context, Infinity)
+// }
+
