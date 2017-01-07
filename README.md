@@ -8,8 +8,8 @@
 underscore + 100%测试
 
 > + ES6编写
-> + buble + rollup 编译打包
-> + tman测试
+> + 编译打包使用[buble](https://github.com/yyx990803/buble) + rollup 
+> + 测试使用[tman](https://github.com/Aladdin-ADD/tman)，兼容Mocha
 > + 代码风格遵守[JS standard](http://standardjs.com/)
 
 ## API ([underscore](http://underscorejs.org/))
