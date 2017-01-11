@@ -7,7 +7,7 @@ var external = process.env.DEPS ? [] : [ 'acorn/dist/acorn.js', 'magic-string' ]
 
 export default {
   entry: 'underscore',
-  moduleName: 'underscore',
+  moduleName: '_',
   plugins: [
     json(),
     commonjs(),

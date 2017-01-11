@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global.underscore = factory());
+  (global._ = factory());
 }(this, (function () { 'use strict';
 
 var _ = function (obj) {
@@ -20,7 +20,22 @@ var underscore = _;
 // 常用函数
 _.noop = function () {};
 _.identity = function (x) { return x };
-
+_.constant = function (val) { return function () { return val } };
+// TODO: _.times
+_.times = function (t) {};
+_.random = function (min, max) {
+  if (max == null) {
+    max = min;
+    min = 0;
+  }
+  return min + Math.floor(Math.random() * (max - min + 1))
+};
+// TODO: _.mixin
+var idCounter = 0;
+_.uniqueId = function (prefix) {
+  var id = ++idCounter + '';
+  return prefix ? prefix + id : id
+};
 var toString = ({}).toString;
 
 // TODO: to support OO-style
