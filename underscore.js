@@ -510,7 +510,7 @@ _.before = function (times, func) {
     return memo
   }
 }
-
+// TODO: _.iteratee
 // _.iteratee = builtinIteratee = function(value, context) {
 //   return cb(value, context, Infinity)
 // }
