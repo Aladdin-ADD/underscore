@@ -14,7 +14,16 @@ module.exports = _
 // 常用函数
 _.noop = function () {}
 _.identity = function (x) { return x }
-
+_.constant = function (val) { return function () { return val } }
+// TODO: _.times
+_.times = function (t) {}
+_.random = function (min, max) {
+  if (max == null) {
+    max = min
+    min = 0
+  }
+  return min + Math.floor(Math.random() * (max - min + 1))
+}
 const toString = ({}).toString
 
 // TODO: to support OO-style
