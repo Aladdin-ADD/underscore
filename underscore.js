@@ -24,6 +24,12 @@ _.random = function (min, max) {
   }
   return min + Math.floor(Math.random() * (max - min + 1))
 }
+// TODO: _.mixin
+let idCounter = 0
+_.uniqueId = function (prefix) {
+  var id = ++idCounter + ''
+  return prefix ? prefix + id : id
+}
 const toString = ({}).toString
 
 // TODO: to support OO-style

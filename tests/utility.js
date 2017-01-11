@@ -22,3 +22,10 @@ tman.it('_.random', function () {
     return _.random(Number.MAX_VALUE) > 0
   }), 'should produce a random number when passed `Number.MAX_VALUE`')
 })
+
+tman.it('_.uniqid', function () {
+  var ids = []
+  var i = 0
+  while (i++ < 100) ids.push(_.uniqueId())
+  assert.strictEqual(_.uniq(ids).length, ids.length, 'can generate a globally-unique stream of ids')
+})
